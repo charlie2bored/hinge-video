@@ -13,10 +13,16 @@
       src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
     }
     @font-face {
-      font-family: "Geist";
+      font-family: "Inter";
       font-style: normal;
       font-weight: 100 900;
-      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+      src: url("assets/fonts/Inter-Variable.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url("assets/fonts/GeistMono-Variable.woff2") format("woff2");
     }
 
     #root {
@@ -24,7 +30,7 @@
       inset: 0;
       overflow: hidden;
       color: #1d1519;
-      font-family: "Geist", sans-serif;
+      font-family: "Inter", sans-serif;
     }
     #beats-bg {
       position: absolute;
@@ -47,19 +53,94 @@
       text-transform: uppercase;
       color: #6a5e64;
     }
-    .beats-day {
+    /* Day counter: a port of Watermelon UI's flip-clock (split-flap digits) */
+    #beats-clock {
       position: absolute;
       left: 0;
       right: 0;
-      top: 200px;
-      text-align: center;
+      top: 132px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    #beats-clock-label {
+      margin-right: 14px;
       font-size: 32px;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-variant-numeric: tabular-nums;
       color: #6a5e64;
+    }
+    /* xl unit is 88×128 / 96px mono 500, #FAFAFA on #171717, 6px visible corners; here at 1.18× */
+    .beats-flip {
+      position: relative;
+      width: 104px;
+      height: 151px;
+    }
+    .beats-stack {
+      position: absolute;
+      inset: 0;
+      border-radius: 7px;
+      overflow: hidden;
+      background: #171717;
+      perspective: 1000px;
+      box-shadow: 0 0 0 1.5px rgba(243, 238, 231, 0.14);
       opacity: 0;
+    }
+    .beats-half {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50%;
+      overflow: hidden;
+      background: #171717;
+      color: #fafafa;
+      backface-visibility: hidden;
+    }
+    .beats-half.top {
+      top: 0;
+      border-radius: 9px 9px 0 0;
+      transform-origin: 50% 100%;
+    }
+    .beats-half.bottom {
+      top: 50%;
+      border-radius: 0 0 9px 9px;
+      transform-origin: 50% 0%;
+    }
+    .beats-half span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 200%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Geist Mono", monospace;
+      font-size: 113px;
+      font-weight: 500;
+    }
+    .beats-half.top span {
+      top: 0;
+    }
+    .beats-half.bottom span {
+      top: -100%;
+    }
+    .beats-half.flap.top {
+      z-index: 2;
+    }
+    .beats-half.flap.bottom {
+      z-index: 1;
+    }
+    .beats-divider {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1.2px;
+      margin-top: -0.6px;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: 3;
     }
     .beats-word {
       position: absolute;
@@ -157,12 +238,12 @@
     <div id="beats-scene" class="clip" data-start="0" data-duration="6" data-track-index="1">
       <div id="beats-chapter">02 — The part in between</div>
 
-      <div class="beats-day" id="beats-d1">Day 1</div>
-      <div class="beats-day" id="beats-d2">Day 2</div>
-      <div class="beats-day" id="beats-d3">Day 9</div>
-      <div class="beats-day" id="beats-d4">Day 16</div>
-      <div class="beats-day" id="beats-d5">Day 58</div>
-      <div class="beats-day" id="beats-d6">Day 214</div>
+      <div id="beats-clock">
+        <div id="beats-clock-label">Day</div>
+        <div class="beats-flip"></div>
+        <div class="beats-flip"></div>
+        <div class="beats-flip"></div>
+      </div>
 
       <div class="beats-word" id="beats-w1"><span>Like.</span></div>
       <div class="beats-word" id="beats-w2">
@@ -194,12 +275,44 @@
       const tl = gsap.timeline({ paused: true });
       const BEAT = 1; // one word per second, on the downbeat
 
-      // Hard cuts: each word and its day counter own exactly one beat.
+      // Hard cuts: each word owns exactly one beat.
       for (let i = 1; i <= 6; i++) {
         const t = (i - 1) * BEAT;
-        tl.set([`#beats-w${i}`, `#beats-d${i}`], { opacity: 1 }, t);
-        if (i < 6) tl.set([`#beats-w${i}`, `#beats-d${i}`], { opacity: 0 }, t + BEAT);
+        tl.set(`#beats-w${i}`, { opacity: 1 }, t);
+        if (i < 6) tl.set(`#beats-w${i}`, { opacity: 0 }, t + BEAT);
       }
+
+      // Flip-clock day counter. One static stack per transition (prev → next),
+      // so every frame is a pure function of time: the top flap falls away
+      // showing the old digit, then the bottom flap swings down with the new one.
+      const DAYS = ["000", "001", "002", "009", "016", "058", "214"];
+      const FLIP = 0.3; // per half, as in the original component
+      const half = (pos, flap, digit) =>
+        `<div class="beats-half ${pos}${flap ? " flap" : ""}"><span data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow>${digit}</span></div>`;
+      document.querySelectorAll(".beats-flip").forEach((unit, col) => {
+        for (let k = 1; k < DAYS.length; k++) {
+          const prev = DAYS[k - 1][col], next = DAYS[k][col];
+          const stack = document.createElement("div");
+          stack.className = "beats-stack";
+          stack.innerHTML =
+            half("top", false, next) + half("bottom", false, prev) +
+            half("bottom", true, next) + half("top", true, prev) +
+            '<div class="beats-divider"></div>';
+          unit.appendChild(stack);
+          const t = (k - 1) * BEAT;
+          tl.set(stack, { opacity: 1 }, t);
+          if (k < DAYS.length - 1) tl.set(stack, { opacity: 0 }, t + BEAT);
+          const flapTop = stack.querySelector(".flap.top");
+          const flapBottom = stack.querySelector(".flap.bottom");
+          if (prev === next) {
+            tl.set(flapBottom, { rotationX: 0 }, 0);
+            continue;
+          }
+          // CSS ease-in (.42,0,1,1) then ease-out (0,0,.58,1): power1 is the near match.
+          tl.fromTo(flapTop, { rotationX: 0 }, { rotationX: -90, duration: FLIP, ease: "power1.in" }, t);
+          tl.fromTo(flapBottom, { rotationX: 90 }, { rotationX: 0, duration: FLIP, ease: "power1.out" }, t + FLIP);
+        }
+      });
 
       // Progress rail fills in steps; each dot pops as its beat lands.
       tl.fromTo("#beats-rail-fill", { scaleX: 0 }, { scaleX: 0.001, duration: 0.01 }, 0);
@@ -229,8 +342,8 @@
       // 5 · Meet the friends. — the room goes dark, the letters pull together.
       tl.set("#beats-dark", { opacity: 1 }, 4);
       tl.set("#beats-dark", { opacity: 0 }, 5);
-      tl.set(["#beats-chapter", "#beats-d5"], { color: "#c9b9c2" }, 4);
-      tl.set(["#beats-chapter"], { color: "#6a5e64" }, 5);
+      tl.set(["#beats-chapter", "#beats-clock-label"], { color: "#c9b9c2" }, 4);
+      tl.set(["#beats-chapter", "#beats-clock-label"], { color: "#6a5e64" }, 5);
       tl.set("#beats-rail-fill", { backgroundColor: "#e7c3d6" }, 4);
       tl.set("#beats-rail-fill", { backgroundColor: "#6d2e62" }, 5);
       tl.set(".beats-dot", { backgroundColor: "#e7c3d6" }, 4);

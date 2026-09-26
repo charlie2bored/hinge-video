@@ -13,10 +13,10 @@
       src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
     }
     @font-face {
-      font-family: "Geist";
+      font-family: "Inter";
       font-style: normal;
       font-weight: 100 900;
-      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+      src: url("assets/fonts/Inter-Variable.woff2") format("woff2");
     }
 
     #root {
@@ -24,7 +24,7 @@
       inset: 0;
       overflow: hidden;
       color: #1d1519;
-      font-family: "Geist", sans-serif;
+      font-family: "Inter", sans-serif;
     }
     #delete-bg {
       position: absolute;
@@ -85,86 +85,113 @@
     }
 
     /* Phone */
+    /* Watermelon UI device.tsx (iPhone SVG, 200×400 viewBox) drawn at 2.3× */
     #delete-phone {
       position: absolute;
       left: 1100px;
-      top: 70px;
+      top: 80px;
       width: 460px;
-      height: 940px;
-      padding: 14px;
-      border-radius: 76px;
-      background: #1d1519;
+      height: 920px;
+      /* punch-in pivots on the approval card so it grows in place */
+      transform-origin: 230px 436.3px;
+    }
+    #delete-phone-shadow {
+      position: absolute;
+      left: 14px;
+      top: 8px;
+      right: 14px;
+      bottom: 8px;
+      border-radius: 73px;
       box-shadow: 0 40px 100px rgba(60, 20, 50, 0.28);
-      /* punch-in pivots on the alert so it grows in place */
-      transform-origin: 230px 437px;
     }
     #delete-screen {
-      position: relative;
-      width: 432px;
-      height: 912px;
+      position: absolute;
+      left: 29.2px;
+      top: 23.25px;
+      width: 401.6px;
+      height: 873.5px;
       border-radius: 62px;
       overflow: hidden;
-      background: linear-gradient(165deg, #2c1529 0%, #6d2e62 52%, #c98fae 100%);
+      /* the device demo's wallpaper: peach → rose → indigo with two soft pills */
+      background: linear-gradient(155deg, #f2c3a6 0%, #cc7c9b 46%, #3f3b72 100%);
+    }
+    .delete-wall-oval {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16));
+    }
+    #delete-frame {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 460px;
+      height: 920px;
     }
     #delete-status {
       position: absolute;
-      left: 46px;
-      top: 22px;
+      left: 40px;
+      top: 18px;
       font-size: 22px;
       font-weight: 600;
-      color: #ffffff;
-    }
-    #delete-island {
-      position: absolute;
-      left: 156px;
-      top: 16px;
-      width: 120px;
-      height: 34px;
-      border-radius: 17px;
-      background: #0d080b;
+      color: #2a1f2a;
     }
     .delete-icon {
       position: absolute;
       width: 76px;
       height: 76px;
     }
+    .delete-icon.dock {
+      width: 52.5px;
+      height: 52.5px;
+    }
+    /* Watermelon dock tile: #F4F4FB, r6 at 42px → 11px at 76, Hugeicons glyph at 62% */
     .delete-tile {
       position: absolute;
       inset: 0;
-      border-radius: 20px;
+      border-radius: 11px;
+      background: #f4f4fb;
+      color: #0a0a0a;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .delete-glyph {
-      width: 30px;
-      height: 30px;
-      border: 4px solid rgba(255, 255, 255, 0.8);
+    .delete-icon.dock .delete-tile {
+      border-radius: 7.5px;
     }
-    .delete-glyph.g0 {
-      border-radius: 50%;
+    .delete-tile svg {
+      width: 62%;
+      height: 62%;
     }
-    .delete-glyph.g1 {
-      border-radius: 8px;
-    }
-    .delete-glyph.g2 {
-      border-radius: 50% 50% 50% 4px;
-    }
-    .delete-glyph.g3 {
-      width: 34px;
-      height: 14px;
-      border-radius: 7px;
-    }
+    /* MetalForge-style liquid-metal tile: brushed chrome + a travelling specular band */
     #delete-hinge .delete-tile {
-      background: #1d1519;
-      box-shadow: inset 0 0 0 1.5px rgba(243, 238, 231, 0.18);
+      overflow: hidden;
+      background:
+        radial-gradient(120% 80% at 30% 0%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 55%),
+        linear-gradient(135deg, #4a4247 0%, #d9d3d7 24%, #767075 40%, #faf8f9 52%, #5f575c 66%, #c8c1c5 82%, #3a3337 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.35),
+        0 4px 10px rgba(0, 0, 0, 0.25);
     }
     #delete-hinge-h {
+      position: relative;
       font-family: "Instrument Serif", serif;
       font-size: 60px;
       line-height: 1;
-      color: #f3eee7;
+      color: #1d1519;
       margin-top: 4px;
+      text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.7),
+        0 -1px 0 rgba(0, 0, 0, 0.25);
+    }
+    #delete-hinge-sheen {
+      position: absolute;
+      left: -40px;
+      top: -20px;
+      width: 36px;
+      height: 130px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0) 100%);
+      transform-origin: 50% 50%;
     }
     .delete-badge {
       position: absolute;
@@ -190,7 +217,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: 750px;
+      top: 716px;
       display: flex;
       justify-content: center;
       gap: 10px;
@@ -204,14 +231,19 @@
     #delete-dots i:first-child {
       background: #ffffff;
     }
+    /* Watermelon dock at 1.25×: white, r24→30, 1.5px #E5E5E9, shadow-sm, no blur */
     #delete-dock {
       position: absolute;
-      left: 16px;
-      right: 16px;
-      top: 784px;
-      height: 112px;
-      border-radius: 40px;
-      background: rgba(255, 255, 255, 0.2);
+      left: 52.6px;
+      top: 771px;
+      width: 296.3px;
+      height: 76.3px;
+      border-radius: 30px;
+      border: 1.9px solid #e5e5e9;
+      background: #ffffff;
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 1px 2px -1px rgba(0, 0, 0, 0.1);
     }
     #delete-dim {
       position: absolute;
@@ -219,53 +251,201 @@
       background: rgba(20, 10, 16, 0.4);
       opacity: 0;
     }
-    #delete-alert {
+    /* Beautiful UI ApprovalCard (1.25× the source metrics), asked as Hinge's exit question */
+    #delete-approval {
       position: absolute;
-      left: 56px;
-      top: 318px;
-      width: 320px;
-      border-radius: 26px;
-      background: rgba(250, 247, 244, 0.97);
-      text-align: center;
+      left: 20.8px;
+      top: 300px;
+      width: 360px;
+      border-radius: 12.5px;
+      background: #ffffff;
+      box-shadow:
+        0 0 0 1px #ecedef,
+        0 18px 47px rgba(0, 0, 0, 0.03),
+        0 7.5px 19px rgba(0, 0, 0, 0.02),
+        0 4px 10.5px rgba(0, 0, 0, 0.02),
+        0 1.2px 3.1px rgba(0, 0, 0, 0.01);
       overflow: hidden;
+      font-family: "Inter", sans-serif;
+      letter-spacing: -0.175px;
+      color: #1f2124;
       opacity: 0;
     }
-    #delete-alert-title {
-      padding: 26px 22px 8px;
-      font-size: 24px;
-      font-weight: 650;
-      color: #1d1519;
+    #delete-approval-body {
+      position: relative;
+      height: 168.5px;
+      padding: 15px;
     }
-    #delete-alert-body {
-      padding: 0 26px 24px;
-      font-size: 20px;
-      line-height: 1.3;
-      color: #4a3f45;
+    #delete-approval-title {
+      height: 26px;
+      padding-right: 35px;
+      font-size: 17.5px;
+      line-height: 26px;
+      font-weight: 500;
     }
-    #delete-alert-actions {
-      display: flex;
-      border-top: 1px solid rgba(29, 21, 25, 0.14);
-    }
-    #delete-alert-actions div {
-      flex: 1;
-      height: 62px;
+    #delete-approval-close {
+      position: absolute;
+      top: 12.5px;
+      right: 12.5px;
+      width: 35px;
+      height: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+    }
+    #delete-approval-options {
+      position: relative;
+      margin-top: 12.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    #delete-approval-glide {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 30px;
+      border-radius: 10px;
+      background: #f4f5f6;
+      opacity: 0;
+    }
+    .delete-option {
+      position: relative;
+      height: 30px;
+      padding: 5px 10px 5px 5px;
+      display: flex;
+      align-items: center;
+      gap: 7.5px;
+      font-size: 16.25px;
+      line-height: 1;
+      color: #62656b;
+    }
+    .delete-radio {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1.9px #e0e2e5;
+    }
+    .delete-radio-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #1f2124;
+      opacity: 0;
+    }
+    .delete-radio-dot {
+      position: absolute;
+      left: 6.25px;
+      top: 6.25px;
+      width: 7.5px;
+      height: 7.5px;
+      border-radius: 50%;
+      background: #f1f2f3;
+    }
+    .delete-option.other {
+      padding-left: 12.5px;
+      color: #9a9da3;
+    }
+    #delete-approval-footer {
+      height: 58.5px;
+      padding: 12.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #delete-approval-count {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      color: #9a9da3;
+    }
+    #delete-approval-count svg {
+      opacity: 0.3;
+    }
+    #delete-approval-actions {
+      display: flex;
+      gap: 7.5px;
+      margin-right: -2.5px;
+    }
+    .delete-pill {
+      height: 34px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      border-radius: 9999px;
+      font-size: 16.25px;
+      font-weight: 500;
+      line-height: 1;
     }
     #delete-keep {
-      color: #1d1519;
-      border-right: 1px solid rgba(29, 21, 25, 0.14);
+      background: #e7e9eb;
+      color: #1f2124;
     }
+    /* --red from the library's own tokens; the source's primary is blue */
     #delete-confirm {
-      color: #a82525;
-      font-weight: 650;
+      background: #e3474c;
+      color: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      opacity: 0.5;
+    }
+    #delete-resolved {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 392px;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+    }
+    #delete-resolved-pill {
+      height: 33px;
+      padding: 5px 12.5px 5px 5px;
+      display: flex;
+      align-items: center;
+      gap: 7.5px;
+      border-radius: 9999px;
+      background: #e8f5ed;
+      color: #137a3c; /* source #199a4d is 3.2:1 on the tint; darkened to clear AA */
+      font-family: "Inter", sans-serif;
+      font-size: 15.6px;
+      font-weight: 500;
+      letter-spacing: -0.175px;
+    }
+    #delete-resolved-disc {
+      width: 22.5px;
+      height: 22.5px;
+      border-radius: 50%;
+      background: #199a4d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Beautiful UI StreamingText caret */
+    .delete-caret {
+      position: relative;
+      display: inline-block;
+      width: 0;
+      height: 1em;
+    }
+    .delete-caret i {
+      position: absolute;
+      left: 4px;
+      bottom: -0.02em;
+      width: 4px;
+      height: 0.9em;
+      border-radius: 9999px;
+      background: #1d1519;
+      opacity: 0;
     }
     #delete-touch {
       position: absolute;
-      left: 139px;
-      top: 211px;
+      left: 126px;
+      top: 201px;
       width: 58px;
       height: 58px;
       border-radius: 50%;
@@ -275,22 +455,99 @@
     }
     .delete-puff {
       position: absolute;
-      left: 160px;
-      top: 232px;
+      left: 147px;
+      top: 222px;
       width: 16px;
       height: 16px;
       border-radius: 50%;
       background: #f3eee7;
       opacity: 0;
     }
+    /* Ditther-style iris: a 240×135 Bayer-dithered buffer blown up with hard pixels */
     #delete-iris {
       position: absolute;
-      left: 1232px;
-      top: 274px;
-      width: 100px;
-      height: 100px;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      image-rendering: pixelated;
+    }
+
+    /* Tokokino-style stage: the device sits on a soft gradient card */
+    #delete-stage {
+      position: absolute;
+      left: 950px;
+      top: 36px;
+      width: 760px;
+      height: 1008px;
+      border-radius: 44px;
+      background:
+        radial-gradient(60% 50% at 18% 12%, rgba(244, 217, 228, 0.95) 0%, rgba(244, 217, 228, 0) 100%),
+        radial-gradient(55% 45% at 88% 86%, rgba(217, 195, 232, 0.9) 0%, rgba(217, 195, 232, 0) 100%),
+        linear-gradient(160deg, #efe4ea 0%, #e8dde6 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(29, 21, 25, 0.06),
+        0 24px 60px rgba(60, 20, 50, 0.08);
+    }
+    .delete-callout {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+    }
+    .delete-callout-pill {
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: #1d1519;
+      color: #f3eee7;
+      font-size: 28px;
+      font-weight: 500;
+      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(29, 21, 25, 0.22);
+    }
+    .delete-callout-line {
+      height: 2px;
+      background: #1d1519;
+      transform-origin: 0 50%;
+    }
+    .delete-callout-dot {
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
       border-radius: 50%;
       background: #1d1519;
+      box-shadow: 0 0 0 5px rgba(243, 238, 231, 0.9);
+    }
+    #delete-callout-hold {
+      right: 669px; /* dot lands on the Hinge icon's left edge (x ≈ 1244) */
+      top: 304px;
+    }
+    #delete-callout-hold .delete-callout-line {
+      width: 236px;
+    }
+    #delete-callout-tap {
+      left: 1578px; /* dot on the Delete pill's right edge while the phone is zoomed 1.5× */
+      top: 615px;
+      flex-direction: row-reverse;
+    }
+    #delete-callout-tap .delete-callout-line {
+      width: 96px;
+      transform-origin: 100% 50%;
+    }
+    #delete-callout-tap .delete-callout-dot {
+      margin-left: 0;
+      margin-right: -7px;
+    }
+    #delete-focus {
+      position: absolute;
+      left: 1232px;
+      top: 281px;
+      width: 104px;
+      height: 104px;
+      border-radius: 30px;
+      border: 3px solid #1d1519;
+      box-shadow: 0 0 0 6px rgba(243, 238, 231, 0.7);
+      opacity: 0;
     }
   </style>
 
@@ -307,21 +564,24 @@
     </div>
 
     <div id="delete-scene" class="clip" data-start="0" data-duration="5.5" data-track-index="1">
-      <div id="delete-chapter">03 — The goal</div>
+      <div id="delete-stage"></div>
+      <div id="delete-chapter" data-layout-allow-occlusion>03 — The goal</div>
 
       <div id="delete-copy">
-        <div id="delete-day">Day 214</div>
+        <div id="delete-day" data-layout-allow-occlusion>Day 214</div>
         <div id="delete-headline">
-          <span>Found your</span>
-          <span><em>person?</em></span>
+          <span data-layout-allow-occlusion>Found your</span>
+          <span data-layout-allow-occlusion><em data-layout-allow-occlusion>person?</em></span>
         </div>
         <div id="delete-sub">Then you know what to do.</div>
       </div>
 
       <div id="delete-phone" data-layout-allow-overflow>
+        <div id="delete-phone-shadow"></div>
         <div id="delete-screen">
+          <div class="delete-wall-oval" style="left: 152px; top: 170px; width: 98px; height: 280px"></div>
+          <div class="delete-wall-oval" style="left: 138px; top: 500px; width: 126px; height: 420px"></div>
           <div id="delete-status">9:41</div>
-          <div id="delete-island"></div>
           <div id="delete-grid"></div>
           <div id="delete-dots"><i></i><i></i><i></i></div>
           <div id="delete-dock"></div>
@@ -332,19 +592,69 @@
           <div class="delete-puff"></div>
           <div class="delete-puff"></div>
           <div id="delete-dim"></div>
-          <div id="delete-alert">
-            <div id="delete-alert-title">Delete “Hinge”?</div>
-            <div id="delete-alert-body">Mission accomplished.</div>
-            <div id="delete-alert-actions">
-              <div id="delete-keep">Keep</div>
-              <div id="delete-confirm">Delete</div>
+          <div id="delete-approval">
+            <div id="delete-approval-body">
+              <div id="delete-approval-title">Delete Hinge?</div>
+              <div id="delete-approval-close">
+                <svg width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" stroke="#9a9da3" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+              </div>
+              <div id="delete-approval-options">
+                <div id="delete-approval-glide"></div>
+                <div class="delete-option" id="delete-opt-met">
+                  <div class="delete-radio"><div class="delete-radio-fill"><div class="delete-radio-dot"></div></div></div>
+                  <span>We met on Hinge</span>
+                </div>
+                <div class="delete-option">
+                  <div class="delete-radio"></div>
+                  <span>Taking a break</span>
+                </div>
+                <div class="delete-option other">Something else…</div>
+              </div>
+            </div>
+            <div id="delete-approval-footer">
+              <div id="delete-approval-count">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9a9da3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6" /></svg>
+                <span>1/1</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9a9da3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+              </div>
+              <div id="delete-approval-actions">
+                <div class="delete-pill" id="delete-keep">Keep</div>
+                <div class="delete-pill" id="delete-confirm">Delete</div>
+              </div>
+            </div>
+          </div>
+          <div id="delete-resolved">
+            <div id="delete-resolved-pill">
+              <div id="delete-resolved-disc">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+              </div>
+              <span>Hinge deleted</span>
             </div>
           </div>
           <div id="delete-touch"></div>
         </div>
+        <!-- Watermelon UI device.tsx iPhone frame (MIT); screen rect omitted so the DOM screen shows through -->
+        <svg id="delete-frame" viewBox="0 0 200 400" fill="none" aria-hidden="true">
+          <path fill="#303333" d="M194.85,127.85c0-.25-.2-.45-.44-.45-.11.04-.37.03-.68,0V36.12c0-17.91-14.29-32.42-31.91-32.42H38.17C20.55,3.7,6.26,18.21,6.26,36.12v49.16c-.3.02-.55.03-.65-.02-.24,0-.44.2-.44.45,0,0,0,17.36,0,17.36-.03.41.5.49,1.09.48v13.68c-.6,0-1.13.08-1.09.49,0,0,0,28.64,0,28.64-.03.42.5.49,1.09.48v7.98c-.6,0-1.13.08-1.09.49,0,0,0,28.64,0,28.64-.03.42.5.49,1.09.48v179.5c0,17.91,14.29,32.42,31.91,32.42h123.65c17.62,0,31.91-14.52,31.91-32.42v-189.55c.31-.02.57-.03.68.04,1.25.1.03-46.11.44-46.55ZM187.32,363.23c0,13.61-13.25,26.65-26.64,26.65H39.32c-13.39,0-26.62-13.04-26.62-26.65V36.8c0-13.61,13.22-26.69,26.62-26.69h121.36c13.39,0,26.64,13.08,26.64,26.69v326.43Z" />
+          <path fill="#000000" d="M161.38,5.89H38.78c-16.54,0-29.95,13.5-29.95,30.15v327.79c0,16.65,13.41,30.15,29.95,30.15h122.6c16.54,0,29.95-13.5,29.95-30.15V36.05c0-16.65-13.41-30.15-29.95-30.15ZM187.32,363.65c0,13.69-12.28,26.24-25.87,26.24H38.7c-13.6,0-26-12.55-26-26.24V36.24c0-13.69,11.42-26.13,25.02-26.13h122.75c13.6,0,26.85,12.44,26.85,26.13v327.4Z" />
+          <path fill="#000000" d="M119.61,32.33h-38.93c-10.48-.18-10.5-15.78,0-15.96,0,0,38.93,0,38.93,0,4.41,0,7.98,3.57,7.98,7.98,0,4.41-3.57,7.98-7.98,7.98Z" />
+          <path fill="#080d4c" d="M118.78,27.68c-4.32.06-4.32-6.73,0-6.66,4.32-.06,4.32,6.73,0,6.66Z" />
+        </svg>
       </div>
 
-      <div id="delete-iris"></div>
+      <div id="delete-focus"></div>
+      <div class="delete-callout" id="delete-callout-hold">
+        <div class="delete-callout-pill">Press &amp; hold</div>
+        <div class="delete-callout-line"></div>
+        <div class="delete-callout-dot"></div>
+      </div>
+      <div class="delete-callout" id="delete-callout-tap">
+        <div class="delete-callout-pill">Tap Delete</div>
+        <div class="delete-callout-line"></div>
+        <div class="delete-callout-dot"></div>
+      </div>
+
+      <canvas id="delete-iris" width="240" height="135" aria-hidden="true" data-layout-allow-occlusion></canvas>
     </div>
   </div>
 
@@ -353,31 +663,54 @@
       const tl = gsap.timeline({ paused: true });
 
       // ---- Home screen, laid out once from fixed constants -------------------
-      const ICON = 76, COL = 96, ROW = 112, X0 = 34, Y0 = 90, HINGE = 5;
+      const ICON = 76, COL = 92, ROW = 108, X0 = 25, Y0 = 84, HINGE = 5;
       const pos = (i) => ({ x: X0 + (i % 4) * COL, y: Y0 + Math.floor(i / 4) * ROW });
-      const tints = [
-        "#e7c3d6", "#c9a27e", "#8fa89b", "#d98b6a", "#f1d9a7", "#hinge", "#9db4c9", "#b7a1c9",
-        "#ebd3c1", "#7e9c8b", "#d4b5a0", "#a7879b", "#f0b9a2", "#88a0b8", "#c7c08f", "#e2a9b9",
-        "#9c8fb4", "#d9c8b0", "#b3cbbf", "#e8bf8e",
+      // Hugeicons free set (MIT), the icon library Watermelon's dock uses.
+      const GRID_ICONS = [
+        "<path d=\"M12.6974 3.5H11.303C10.5884 3.5 10.2311 3.5 9.91067 3.612C9.71499 3.68039 9.53113 3.77879 9.36568 3.90367C9.09474 4.10816 8.89655 4.40544 8.50018 5L8.50017 5.00001C8.29717 5.30453 7.99794 5.75337 7.87867 5.87871C7.58314 6.18927 7.19563 6.39666 6.77329 6.47029C6.60284 6.5 6.41985 6.5 6.05387 6.5C5.07379 6.5 4.58376 6.5 4.18307 6.61342C3.18074 6.89716 2.39734 7.68055 2.1136 8.68289C2.00018 9.08357 2.00018 9.57361 2.00018 10.5537V14.5C2.00018 17.3284 2.00018 18.7426 2.87886 19.6213C3.75754 20.5 5.17176 20.5 8.00018 20.5H16.0002C18.8286 20.5 20.2428 20.5 21.1215 19.6213C22.0002 18.7426 22.0002 17.3284 22.0002 14.5V10.5537C22.0002 9.57361 22.0002 9.08357 21.8868 8.68289C21.603 7.68055 20.8196 6.89716 19.8173 6.61342C19.4166 6.5 18.9266 6.5 17.9465 6.5C17.5805 6.5 17.3975 6.5 17.2271 6.47029C16.8047 6.39666 16.4172 6.18927 16.1217 5.87871C16.0024 5.75336 15.7032 5.30451 15.5002 5C15.1038 4.40544 14.9056 4.10816 14.6347 3.90367C14.4692 3.77879 14.2854 3.68039 14.0897 3.612C13.7693 3.5 13.412 3.5 12.6974 3.5Z\"/><path d=\"M16.0002 13C16.0002 15.2091 14.2093 17 12.0002 17C9.79104 17 8.00018 15.2091 8.00018 13C8.00018 10.7909 9.79104 9 12.0002 9C14.2093 9 16.0002 10.7909 16.0002 13Z\"/><path d=\"M19.0002 9.5V9.51\"/>",
+        "<path d=\"M16 2V6M8 2V6\"/><path d=\"M13 4H11C7.22876 4 5.34315 4 4.17157 5.17157C3 6.34315 3 8.22876 3 12V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C21 19.6569 21 17.7712 21 14V12C21 8.22876 21 6.34315 19.8284 5.17157C18.6569 4 16.7712 4 13 4Z\"/><path d=\"M3 10H21\"/><path d=\"M11.9955 14H12.0045M11.9955 18H12.0045M15.991 14H16M8 14H8.00897M8 18H8.00897\"/>",
+        "<path d=\"M7 9.5C7 10.8807 5.88071 12 4.5 12C3.11929 12 2 10.8807 2 9.5C2 8.11929 3.11929 7 4.5 7C5.88071 7 7 8.11929 7 9.5ZM7 9.5V2C7.33333 2.5 7.6 4.6 10 5\"/><circle cx=\"10.5\" cy=\"19.5\" r=\"2.5\"/><circle cx=\"20\" cy=\"18\" r=\"2\"/><path d=\"M13 19.5L13 11C13 10.09 13 9.63502 13.2466 9.35248C13.4932 9.06993 13.9938 9.00163 14.9949 8.86504C18.0085 8.45385 20.2013 7.19797 21.3696 6.42937C21.6498 6.24509 21.7898 6.15295 21.8949 6.20961C22 6.26627 22 6.43179 22 6.76283V17.9259\"/><path d=\"M13 13C17.8 13 21 10.6667 22 10\"/>",
+        "<path d=\"M5.25345 4.19584L4.02558 4.90813C3.03739 5.48137 2.54329 5.768 2.27164 6.24483C2 6.72165 2 7.30233 2 8.46368V16.6283C2 18.1542 2 18.9172 2.34226 19.3418C2.57001 19.6244 2.88916 19.8143 3.242 19.8773C3.77226 19.9719 4.42148 19.5953 5.71987 18.8421C6.60156 18.3306 7.45011 17.7994 8.50487 17.9435C8.98466 18.009 9.44231 18.2366 10.3576 18.6917L14.1715 20.588C14.9964 20.9982 15.004 21 15.9214 21H18C19.8856 21 20.8284 21 21.4142 20.4013C22 19.8026 22 18.8389 22 16.9117V10.1715C22 8.24423 22 7.2806 21.4142 6.68188C20.8284 6.08316 19.8856 6.08316 18 6.08316H15.9214C15.004 6.08316 14.9964 6.08139 14.1715 5.6712L10.8399 4.01463C9.44884 3.32297 8.75332 2.97714 8.01238 3.00117C7.27143 3.02521 6.59877 3.41542 5.25345 4.19584Z\"/><path d=\"M8 3L8 17.5\"/><path d=\"M15 6.5L15 20.5\"/>",
+        "<path d=\"M2 6L8.91302 9.91697C11.4616 11.361 12.5384 11.361 15.087 9.91697L22 6\"/><path d=\"M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z\"/>",
+        "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 8V12L14 14\"/>",
+        "<path d=\"M15.5 7H8.5M12.499 11H8.49902\"/><path d=\"M20 22H6C4.89543 22 4 21.1046 4 20M4 20C4 18.8954 4.89543 18 6 18H20V6C20 4.11438 20 3.17157 19.4142 2.58579C18.8284 2 17.8856 2 16 2H10C7.17157 2 5.75736 2 4.87868 2.87868C4 3.75736 4 5.17157 4 8V20Z\"/><path d=\"M19.5 18C19.5 18 18.5 18.7628 18.5 20C18.5 21.2372 19.5 22 19.5 22\"/>",
+        "<circle cx=\"7.5\" cy=\"7.5\" r=\"1.5\"/><path d=\"M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z\"/><path d=\"M5 21C9.37246 15.775 14.2741 8.88406 21.4975 13.5424\"/>",
+        "<path d=\"M3.32352 13.0113C3.6739 10.009 4.18586 7.75784 4.66063 6.15851C5.04994 4.84711 5.24459 4.19141 6.04283 3.5957C6.84107 3 7.65697 3 9.28876 3H14.7113C16.3431 3 17.159 3 17.9572 3.5957C18.7554 4.19141 18.9501 4.84711 19.3394 6.15851C19.8142 7.75784 20.3261 10.009 20.6765 13.0113C21.0895 16.5497 21.2959 18.3189 20.1027 19.6594C18.9095 21 16.9758 21 13.1084 21H10.8916C7.02422 21 5.09052 21 3.89731 19.6594C2.70411 18.3189 2.91058 16.5497 3.32352 13.0113Z\"/><path d=\"M9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7\"/>",
+        "<path d=\"M14 3H5C3.89543 3 3 3.89543 3 5C3 6.10457 3.89543 7 5 7H18C18 6.07003 18 5.60504 17.8978 5.22354C17.6204 4.18827 16.8117 3.37962 15.7765 3.10222C15.395 3 14.93 3 14 3Z\"/><path d=\"M3 5V15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15V13C21 10.1716 21 8.75736 20.1213 7.87868C19.2426 7 17.8284 7 15 7H7\"/><path d=\"M21 12H19C18.535 12 18.3025 12 18.1118 12.0511C17.5941 12.1898 17.1898 12.5941 17.0511 13.1118C17 13.3025 17 13.535 17 14C17 14.465 17 14.6975 17.0511 14.8882C17.1898 15.4059 17.5941 15.8102 18.1118 15.9489C18.3025 16 18.535 16 19 16H21\"/>",
+        "<path d=\"M9.1585 5.71217L8.75584 4.80619C8.49256 4.21382 8.36092 3.91762 8.16405 3.69095C7.91732 3.40688 7.59571 3.19788 7.23592 3.08779C6.94883 2.99994 6.6247 2.99994 5.97645 2.99994C5.02815 2.99994 4.554 2.99994 4.15597 3.18223C3.68711 3.39696 3.26368 3.86322 3.09497 4.35054C2.95175 4.76423 2.99278 5.18937 3.07482 6.03964C3.94815 15.0901 8.91006 20.052 17.9605 20.9254C18.8108 21.0074 19.236 21.0484 19.6496 20.9052C20.137 20.7365 20.6032 20.3131 20.818 19.8442C21.0002 19.4462 21.0002 18.972 21.0002 18.0237C21.0002 17.3755 21.0002 17.0514 20.9124 16.7643C20.8023 16.4045 20.5933 16.0829 20.3092 15.8361C20.0826 15.6393 19.7864 15.5076 19.194 15.2443L18.288 14.8417C17.6465 14.5566 17.3257 14.414 16.9998 14.383C16.6878 14.3533 16.3733 14.3971 16.0813 14.5108C15.7762 14.6296 15.5066 14.8543 14.9672 15.3038C14.4304 15.7511 14.162 15.9748 13.834 16.0946C13.5432 16.2009 13.1588 16.2402 12.8526 16.1951C12.5071 16.1442 12.2426 16.0028 11.7135 15.7201C10.0675 14.8404 9.15977 13.9327 8.28011 12.2867C7.99738 11.7576 7.85602 11.4931 7.80511 11.1476C7.75998 10.8414 7.79932 10.457 7.90554 10.1662C8.02536 9.83822 8.24905 9.5698 8.69643 9.03294C9.14586 8.49362 9.37058 8.22396 9.48939 7.91885C9.60309 7.62688 9.64686 7.31234 9.61719 7.00042C9.58618 6.67446 9.44362 6.3537 9.1585 5.71217Z\"/>",
+        "<path d=\"M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z\"/><path d=\"M12 2V3.5M12 20.5V22M19.0708 19.0713L18.0101 18.0106M5.98926 5.98926L4.9286 4.9286M22 12H20.5M3.5 12H2M19.0713 4.92871L18.0106 5.98937M5.98975 18.0107L4.92909 19.0714\"/>",
+        "<path d=\"M3 11.9896V14.5C3 17.7998 3 19.4497 4.02513 20.4749C5.05025 21.5 6.70017 21.5 10 21.5H14C17.2998 21.5 18.9497 21.5 19.9749 20.4749C21 19.4497 21 17.7998 21 14.5V11.9896C21 10.3083 21 9.46773 20.6441 8.74005C20.2882 8.01237 19.6247 7.49628 18.2976 6.46411L16.2976 4.90855C14.2331 3.30285 13.2009 2.5 12 2.5C10.7991 2.5 9.76689 3.30285 7.70242 4.90855L5.70241 6.46411C4.37533 7.49628 3.71179 8.01237 3.3559 8.74005C3 9.46773 3 10.3083 3 11.9896Z\"/><path d=\"M15.0002 17C14.2007 17.6224 13.1504 18 12.0002 18C10.8499 18 9.79971 17.6224 9.00018 17\"/>",
+        "<path d=\"M5 7L6.7602 17.4048C7.06616 19.2134 7.21914 20.1177 7.76007 20.7417C9.21438 22.4194 14.7856 22.4194 16.2399 20.7417C16.7809 20.1177 16.9338 19.2134 17.2398 17.4048L19 7\"/><path d=\"M5 7L5.74278 5.2876C6.35168 3.88385 6.65613 3.18197 7.29101 2.7856C8.88049 1.79324 14.9452 1.68444 16.709 2.7856C17.3439 3.18197 17.6483 3.88385 18.2572 5.2876L19 7\"/><path d=\"M4 7H20\"/><ellipse cx=\"12\" cy=\"14.5\" rx=\"2\" ry=\"2.5\"/>",
+        "<path d=\"M7.73438 13.7323C7.73438 13.7323 8.63984 12.5102 9.23438 12.2319C11.0292 11.3915 11.3943 11.0263 12.2344 9.23091C12.5127 8.63618 13.7344 7.73044 13.7344 7.73044M10.2344 16.2331C10.2344 16.2331 11.4561 15.3273 11.7344 14.7326C12.5745 12.9373 12.9396 12.5721 14.7344 11.7317C15.3289 11.4533 16.2344 10.2312 16.2344 10.2312\"/><path d=\"M14.4311 2.89207C14.938 2.38343 15.7611 2.38212 16.2696 2.88916L21.0814 7.68726C21.5899 8.1943 21.5912 9.01767 21.0843 9.52632L19.5557 11.0603C19.0488 11.5689 18.2257 11.5702 17.7172 11.0632L12.9054 6.26507C12.397 5.75803 12.3957 4.93466 12.9025 4.42601L14.4311 2.89207Z\"/><path d=\"M4.41377 12.9022C4.92065 12.3936 5.74376 12.3923 6.25225 12.8993L11.0641 17.6974C11.5725 18.2045 11.5738 19.0278 11.067 19.5365L9.53836 21.0704C9.03148 21.5791 8.20837 21.5804 7.69988 21.0733L2.88808 16.2752C2.37959 15.7682 2.37829 14.9448 2.88517 14.4362L4.41377 12.9022Z\"/><path d=\"M17.9377 3.45254C19.8201 0.985467 23.14 3.8401 20.5431 6.02872M3.37811 17.9773C0.998473 19.9687 3.99782 23.1586 6.06742 20.4657\"/>",
+        "<path d=\"M15.8667 3.7804C16.7931 3.03188 17.8307 2.98644 18.9644 3.00233C19.5508 3.01055 19.844 3.01467 20.0792 3.10588C20.4524 3.2506 20.7494 3.54764 20.8941 3.92081C20.9853 4.15601 20.9894 4.4492 20.9977 5.03557C21.0136 6.16926 20.9681 7.20686 20.2196 8.13326C19.5893 8.91337 18.5059 9.32101 17.9846 10.1821C17.5866 10.8395 17.772 11.5203 17.943 12.2209L19.2228 17.4662C19.4779 18.5115 19.2838 19.1815 18.5529 19.9124C18.164 20.3013 17.8405 20.2816 17.5251 19.779L13.6627 13.6249L11.8181 15.0911C11.1493 15.6228 10.8149 15.8886 10.6392 16.2627C10.2276 17.1388 10.4889 18.4547 10.5022 19.4046C10.5096 19.9296 10.0559 20.9644 9.41391 20.9993C9.01756 21.0209 8.88283 20.5468 8.75481 20.2558L7.52234 17.4544C7.2276 16.7845 7.21552 16.7724 6.54556 16.4777L3.74415 15.2452C3.45318 15.1172 2.97914 14.9824 3.00071 14.5861C3.03565 13.9441 4.07036 13.4904 4.59536 13.4978C5.54532 13.5111 6.86122 13.7724 7.73734 13.3608C8.11142 13.1851 8.37724 12.8507 8.90888 12.1819L10.3751 10.3373L4.22103 6.47489C3.71845 6.15946 3.69872 5.83597 4.08755 5.44715C4.8185 4.7162 5.48851 4.52214 6.53377 4.77718L11.7791 6.05703C12.4797 6.22798 13.1605 6.41343 13.8179 6.0154C14.679 5.49411 15.0866 4.41074 15.8667 3.7804Z\"/>",
+        "<path d=\"M18 15V9C18 6.17157 18 4.75736 17.1213 3.87868C16.2426 3 14.8284 3 12 3H8C5.17157 3 3.75736 3 2.87868 3.87868C2 4.75736 2 6.17157 2 9V15C2 17.8284 2 19.2426 2.87868 20.1213C3.75736 21 5.17157 21 8 21H20\"/><path d=\"M6 8L14 8\"/><path d=\"M6 12L14 12\"/><path d=\"M6 16L10 16\"/><path d=\"M18 8H19C20.4142 8 21.1213 8 21.5607 8.43934C22 8.87868 22 9.58579 22 11V19C22 20.1046 21.1046 21 20 21C18.8954 21 18 20.1046 18 19V8Z\"/>",
+        "<path d=\"M21.3175 7.14139L20.8239 6.28479C20.4506 5.63696 20.264 5.31305 19.9464 5.18388C19.6288 5.05472 19.2696 5.15664 18.5513 5.36048L17.3311 5.70418C16.8725 5.80994 16.3913 5.74994 15.9726 5.53479L15.6357 5.34042C15.2766 5.11043 15.0004 4.77133 14.8475 4.37274L14.5136 3.37536C14.294 2.71534 14.1842 2.38533 13.9228 2.19657C13.6615 2.00781 13.3143 2.00781 12.6199 2.00781H11.5051C10.8108 2.00781 10.4636 2.00781 10.2022 2.19657C9.94085 2.38533 9.83106 2.71534 9.61149 3.37536L9.27753 4.37274C9.12465 4.77133 8.84845 5.11043 8.48937 5.34042L8.15249 5.53479C7.73374 5.74994 7.25259 5.80994 6.79398 5.70418L5.57375 5.36048C4.85541 5.15664 4.49625 5.05472 4.17867 5.18388C3.86109 5.31305 3.67445 5.63696 3.30115 6.28479L2.80757 7.14139C2.45766 7.74864 2.2827 8.05227 2.31666 8.37549C2.35061 8.69871 2.58483 8.95918 3.05326 9.48012L4.0843 10.6328C4.3363 10.9518 4.51521 11.5078 4.51521 12.0077C4.51521 12.5078 4.33636 13.0636 4.08433 13.3827L3.05326 14.5354C2.58483 15.0564 2.35062 15.3168 2.31666 15.6401C2.2827 15.9633 2.45766 16.2669 2.80757 16.8741L3.30114 17.7307C3.67443 18.3785 3.86109 18.7025 4.17867 18.8316C4.49625 18.9608 4.85542 18.8589 5.57377 18.655L6.79394 18.3113C7.25263 18.2055 7.73387 18.2656 8.15267 18.4808L8.4895 18.6752C8.84851 18.9052 9.12464 19.2442 9.2775 19.6428L9.61149 20.6403C9.83106 21.3003 9.94085 21.6303 10.2022 21.8191C10.4636 22.0078 10.8108 22.0078 11.5051 22.0078H12.6199C13.3143 22.0078 13.6615 22.0078 13.9228 21.8191C14.1842 21.6303 14.294 21.3003 14.5136 20.6403L14.8476 19.6428C15.0004 19.2442 15.2765 18.9052 15.6356 18.6752L15.9724 18.4808C16.3912 18.2656 16.8724 18.2055 17.3311 18.3113L18.5513 18.655C19.2696 18.8589 19.6288 18.9608 19.9464 18.8316C20.264 18.7025 20.4506 18.3785 20.8239 17.7307L21.3175 16.8741C21.6674 16.2669 21.8423 15.9633 21.8084 15.6401C21.7744 15.3168 21.5402 15.0564 21.0718 14.5354L20.0407 13.3827C19.7887 13.0636 19.6098 12.5078 19.6098 12.0077C19.6098 11.5078 19.7888 10.9518 20.0407 10.6328L21.0718 9.48012C21.5402 8.95918 21.7744 8.69871 21.8084 8.37549C21.8423 8.05227 21.6674 7.74864 21.3175 7.14139Z\"/><path d=\"M15.5195 12C15.5195 13.933 13.9525 15.5 12.0195 15.5C10.0865 15.5 8.51953 13.933 8.51953 12C8.51953 10.067 10.0865 8.5 12.0195 8.5C13.9525 8.5 15.5195 10.067 15.5195 12Z\"/>",
       ];
-      const dockTints = ["#f3eee7", "#9db4c9", "#8fa89b", "#e7c3d6"];
+      const DOCK_ICONS = [
+        "<path d=\"M17 17L21 21\"/><path d=\"M19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19C15.4183 19 19 15.4183 19 11Z\"/>",
+        "<path d=\"M16.5 2V5M7.5 2V5M12 2V5\"/><path d=\"M13 3.5H11C7.70017 3.5 6.05025 3.5 5.02513 4.52513C4 5.55025 4 7.20017 4 10.5V15C4 18.2998 4 19.9497 5.02513 20.9749C6.05025 22 7.70017 22 11 22H13C16.2998 22 17.9497 22 18.9749 20.9749C20 19.9497 20 18.2998 20 15V10.5C20 7.20017 20 5.55025 18.9749 4.52512C17.9497 3.5 16.2998 3.5 13 3.5Z\"/><path d=\"M8 15H12M8 11H16\"/>",
+        "<path d=\"M2.5 12.0001C2.5 7.52171 2.5 5.28254 3.89124 3.8913C5.28249 2.50005 7.52166 2.50005 12 2.50005C16.4783 2.50005 18.7175 2.50005 20.1088 3.8913C21.5 5.28254 21.5 7.52171 21.5 12.0001C21.5 16.4784 21.5 18.7176 20.1088 20.1088C18.7175 21.5001 16.4783 21.5001 12 21.5001C7.52166 21.5001 5.28249 21.5001 3.89124 20.1088C2.5 18.7176 2.5 16.4784 2.5 12.0001Z\"/><path d=\"M12 8.00005V16.0001M16 12.0001L8 12.0001\"/>",
+        "<path d=\"M21.9598 10.9707C22.0134 11.8009 22.0134 12.6607 21.9598 13.4909C21.6856 17.7332 18.3536 21.1125 14.1706 21.3905C12.7435 21.4854 11.2536 21.4852 9.8294 21.3905C9.33896 21.3579 8.8044 21.2409 8.34401 21.0513C7.83177 20.8403 7.5756 20.7348 7.44544 20.7508C7.31527 20.7668 7.1264 20.9061 6.74868 21.1846C6.08268 21.6757 5.24367 22.0285 3.99943 21.9982C3.37026 21.9829 3.05568 21.9752 2.91484 21.7351C2.77401 21.495 2.94941 21.1626 3.30021 20.4978C3.78674 19.5758 4.09501 18.5203 3.62791 17.6746C2.82343 16.4666 2.1401 15.036 2.04024 13.4909C1.98659 12.6607 1.98659 11.8009 2.04024 10.9707C2.31441 6.72838 5.64639 3.34913 9.8294 3.07107C11.0318 2.99114 11.2812 2.97856 12.5 3.03368\"/><path d=\"M8.5 15H15.5M8.5 10H12\"/><path d=\"M22 5.5C22 7.433 20.433 9 18.5 9C16.567 9 15 7.433 15 5.5C15 3.567 16.567 2 18.5 2C20.433 2 22 3.567 22 5.5Z\"/>",
+      ];
+      const glyph = (markup) =>
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${markup}</svg>`;
+      const apps = [...GRID_ICONS.slice(0, HINGE), null, ...GRID_ICONS.slice(HINGE)];
       const screen = document.getElementById("delete-screen");
       const grid = document.getElementById("delete-grid");
       const dock = document.getElementById("delete-dock");
 
-      const makeIcon = (parent, left, top, tint, glyph, id) => {
+      const makeIcon = (parent, left, top, markup, id, dockItem) => {
         const icon = document.createElement("div");
-        icon.className = "delete-icon";
+        icon.className = dockItem ? "delete-icon dock" : "delete-icon";
         if (id) icon.id = id;
         icon.style.left = left + "px";
         icon.style.top = top + "px";
         const tile = document.createElement("div");
         tile.className = "delete-tile";
         if (id === "delete-hinge") {
-          tile.innerHTML = '<span id="delete-hinge-h" data-layout-allow-occlusion>H</span>';
+          tile.innerHTML = '<div id="delete-hinge-sheen"></div><span id="delete-hinge-h" data-layout-allow-occlusion>H</span>';
         } else {
-          tile.style.background = tint;
-          tile.innerHTML = `<div class="delete-glyph g${glyph}"></div>`;
+          tile.innerHTML = glyph(markup);
         }
         const badge = document.createElement("div");
         badge.className = "delete-badge";
@@ -386,18 +719,23 @@
         return icon;
       };
 
-      const icons = tints.map((tint, i) => {
+      const icons = apps.map((markup, i) => {
         const p = pos(i);
-        return makeIcon(grid, p.x, p.y, tint, (i * 7) % 4, i === HINGE ? "delete-hinge" : null);
+        return makeIcon(grid, p.x, p.y, markup, i === HINGE ? "delete-hinge" : null);
       });
-      const dockIcons = dockTints.map((tint, i) => makeIcon(dock, 18 + i * COL, 18, tint, (i * 3 + 1) % 4));
+      const dockIcons = DOCK_ICONS.map((markup, i) => makeIcon(dock, 15 + i * 70, 10, markup, null, true));
       const everyIcon = [...icons, ...dockIcons];
       const hinge = icons[HINGE];
 
       // ---- Copy and phone arrive ---------------------------------------------
       tl.fromTo("#delete-glow", { scale: 0.95 }, { scale: 1.05, duration: 2.75, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
       tl.fromTo("#delete-chapter", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
-      tl.fromTo("#delete-phone", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0);
+      tl.fromTo("#delete-stage", { scale: 0.96, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }, 0);
+      tl.fromTo("#delete-phone", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.05);
+
+      // Specular band crosses the metal tile twice.
+      tl.fromTo("#delete-hinge-sheen", { x: 0, rotation: 20 }, { x: 150, rotation: 20, duration: 0.7, ease: "power2.inOut" }, 0.5);
+      tl.fromTo("#delete-hinge-sheen", { x: 0 }, { x: 150, duration: 0.7, ease: "power2.inOut", immediateRender: false }, 1.35);
       tl.fromTo("#delete-day", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.15);
       tl.fromTo(
         "#delete-headline span",
@@ -405,13 +743,48 @@
         { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.14 },
         0.25,
       );
-      tl.fromTo("#delete-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+      // Sub line streams like Beautiful UI's StreamingText: one word every 55ms,
+      // no per-word fade, a solid caret riding the last word, gone when done.
+      const sub = document.getElementById("delete-sub");
+      const words = sub.textContent.trim().split(" ");
+      sub.innerHTML = words
+        .map((w) => `<span class="delete-word" data-layout-allow-occlusion>${w}<span class="delete-caret"><i></i></span> </span>`)
+        .join("");
+      const STREAM = 1.0, STEP = 0.055;
+      const wordEls = sub.querySelectorAll(".delete-word");
+      const carets = sub.querySelectorAll(".delete-caret i");
+      tl.set(wordEls, { opacity: 0 }, 0);
+      wordEls.forEach((w, i) => {
+        const t = STREAM + i * STEP;
+        tl.set(w, { opacity: 1 }, t);
+        if (i === 0) tl.fromTo(carets[0], { opacity: 0 }, { opacity: 1, duration: STEP * 0.9, ease: "power1.out" }, t);
+        else tl.set(carets[i], { opacity: 1 }, t);
+        tl.set(carets[i], { opacity: 0 }, i < words.length - 1 ? t + STEP : t + 0.45);
+      });
 
       // ---- Long-press: icons start to jiggle ----------------------------------
       tl.fromTo("#delete-touch", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power2.out" }, 1.2);
       tl.to("#delete-touch", { scale: 1.25, duration: 0.4, ease: "sine.out" }, 1.4);
-      tl.to(hinge, { scale: 1.08, duration: 0.4, ease: "sine.out" }, 1.4);
-      tl.to(hinge, { scale: 1, duration: 0.2, ease: "power2.out" }, 1.8);
+      // Edit mode pops the pressed icon with Watermelon's dock click spring
+      // (k550 c15 m1.1, target scale 1.3 held 200ms), solved analytically.
+      const spring = (k, c, m) => {
+        const w0 = Math.sqrt(k / m), z = c / (2 * Math.sqrt(k * m)), wd = w0 * Math.sqrt(1 - z * z);
+        return (t) => (t <= 0 ? 0 : 1 - Math.exp(-z * w0 * t) * (Math.cos(wd * t) + ((z * w0) / wd) * Math.sin(wd * t)));
+      };
+      const S = spring(550, 15, 1.1);
+      const pop = { t: 0 };
+      tl.fromTo(
+        pop,
+        { t: 0 },
+        {
+          t: 0.9,
+          duration: 0.9,
+          ease: "none",
+          onUpdate: () => gsap.set(hinge, { scale: 1 + 0.3 * (S(pop.t) - S(pop.t - 0.2)) }),
+          immediateRender: false,
+        },
+        1.8,
+      );
       tl.fromTo(
         everyIcon,
         { rotation: -2.4 },
@@ -425,6 +798,13 @@
         1.82,
       );
 
+      // Callout: "Press & hold" with a focus ring on the icon.
+      tl.fromTo("#delete-focus", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, 1.2);
+      tl.to("#delete-focus", { opacity: 0, duration: 0.2, ease: "power2.out" }, 1.95);
+      tl.fromTo("#delete-callout-hold", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 1.25);
+      tl.fromTo("#delete-callout-hold .delete-callout-line", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 1.3);
+      tl.to("#delete-callout-hold", { opacity: 0, duration: 0.2, ease: "power2.out" }, 2.15);
+
       // ---- Tap the badge, confirm --------------------------------------------
       const hp = pos(HINGE);
       tl.to("#delete-touch", { x: -34, y: -34, scale: 1, duration: 0.3, ease: "power2.inOut" }, 1.95);
@@ -433,14 +813,37 @@
       tl.to("#delete-phone", { scale: 1.5, duration: 0.5, ease: "power3.inOut" }, 2.3);
       tl.to("#delete-phone", { scale: 1, duration: 0.45, ease: "power3.inOut" }, 3.5);
       tl.fromTo("#delete-dim", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 2.42);
-      tl.fromTo("#delete-alert", { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "power3.out" }, 2.45);
-      // Delete button centre in screen coords: alert left 56 + 3/4 of 320, row sits ~152px into the alert.
-      tl.to("#delete-touch", { x: 56 + 240 - (hp.x + 38), y: 318 + 152 - (hp.y + 38), duration: 0.45, ease: "power2.inOut" }, 2.75);
+      // ApprovalCard enters: fade-up 8px, 380ms, ease-out-strong.
+      tl.fromTo("#delete-approval", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 2.45);
+
+      // Pick "We met on Hinge": glide highlight, radio fills, label inks, Delete wakes up.
+      // Touch targets in screen coords (touch starts centred on the icon at 168, 240).
+      const TOUCH0 = { x: hp.x + 38, y: hp.y + 38 };
+      const OPTION = { x: 100.8, y: 368 }, CONFIRM = { x: 330.8, y: 498 };
+      tl.to("#delete-touch", { x: OPTION.x - TOUCH0.x, y: OPTION.y - TOUCH0.y, duration: 0.3, ease: "power2.inOut" }, 2.6);
+      tl.to("#delete-touch", { scale: 0.8, duration: 0.08, ease: "power2.in" }, 2.92);
+      tl.to("#delete-touch", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.0);
+      tl.fromTo("#delete-approval-glide", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 2.8);
+      tl.fromTo("#delete-opt-met .delete-radio-fill", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.inOut" }, 2.95);
+      tl.fromTo("#delete-opt-met .delete-radio-dot", { scale: 0 }, { scale: 1, duration: 0.2, ease: "power2.inOut" }, 2.95);
+      tl.to("#delete-opt-met", { color: "#1f2124", duration: 0.2, ease: "power2.inOut" }, 2.95);
+      tl.to("#delete-confirm", { opacity: 1, duration: 0.15, ease: "power2.out" }, 2.95);
+
+      // Tap Delete.
+      tl.to("#delete-touch", { x: CONFIRM.x - TOUCH0.x, y: CONFIRM.y - TOUCH0.y, duration: 0.24, ease: "power2.inOut" }, 3.03);
+      tl.fromTo("#delete-callout-tap", { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, 3.0);
+      tl.fromTo("#delete-callout-tap .delete-callout-line", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power3.out" }, 3.03);
+      tl.to("#delete-callout-tap", { opacity: 0, duration: 0.2, ease: "power2.out" }, 3.38);
       tl.to("#delete-touch", { scale: 0.8, duration: 0.08, ease: "power2.in" }, 3.28);
-      tl.fromTo("#delete-confirm", { backgroundColor: "rgba(196,45,45,0)" }, { backgroundColor: "rgba(196,45,45,0.14)", duration: 0.08 }, 3.28);
+      tl.to("#delete-confirm", { scale: 0.96, duration: 0.08, ease: "power2.out" }, 3.28);
+      tl.to("#delete-confirm", { scale: 1, duration: 0.15, ease: "power2.out" }, 3.36);
       tl.to("#delete-touch", { scale: 1.3, opacity: 0, duration: 0.25, ease: "power2.out" }, 3.38);
-      tl.to("#delete-alert", { scale: 0.96, opacity: 0, duration: 0.2, ease: "power2.in" }, 3.45);
+
+      // Resolved: the card unmounts instantly and the green pill pops in (260ms).
+      tl.set("#delete-approval", { opacity: 0 }, 3.4);
+      tl.fromTo("#delete-resolved", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.26, ease: "power4.out" }, 3.4);
       tl.to("#delete-dim", { opacity: 0, duration: 0.25, ease: "power2.out" }, 3.5);
+      tl.to("#delete-resolved", { opacity: 0, y: -8, duration: 0.25, ease: "power2.in" }, 4.3);
 
       // ---- The app goes -------------------------------------------------------
       tl.to(hinge, { scale: 0, rotation: 18, duration: 0.32, ease: "back.in(2)" }, 3.68);
@@ -460,8 +863,55 @@
         tl.to(icon, { x: to.x - from.x, y: to.y - from.y, duration: 0.45, ease: "power3.inOut" }, 4.0 + k * 0.025);
       });
 
-      // ---- Iris out of the empty slot into the end card ----------------------
-      tl.fromTo("#delete-iris", { scale: 0 }, { scale: 32, duration: 0.85, ease: "power3.in" }, 4.55);
+      // ---- Dithered iris out of the empty slot into the end card -------------
+      // Stateless per frame: each 8px cell compares (progress − distance) to an
+      // 8×8 Bayer threshold, so any seek repaints the same pixels.
+      const iris = document.getElementById("delete-iris");
+      const ictx = iris.getContext("2d");
+      const W = 240, H = 135, CX = 1284.2 / 8, CY = 333.3 / 8; // Hinge icon centre, global
+      const MAXD = Math.hypot(CX, H - CY);
+      const bayer = (() => {
+        let m = [[0]];
+        while (m.length < 8) {
+          const n = m.length, next = [];
+          for (let y = 0; y < n * 2; y++) {
+            next.push([]);
+            for (let x = 0; x < n * 2; x++) {
+              const q = [0, 2, 3, 1][(y >= n) * 2 + (x >= n)];
+              next[y].push(4 * m[y % n][x % n] + q);
+            }
+          }
+          m = next;
+        }
+        return m.map((row) => row.map((v) => (v + 0.5) / 64));
+      })();
+      const img = ictx.createImageData(W, H);
+      const INK = [29, 21, 25], PLUM = [109, 46, 98];
+      const paintIris = (p) => {
+        const d = img.data;
+        for (let y = 0; y < H; y++) {
+          for (let x = 0; x < W; x++) {
+            const i = (y * W + x) * 4;
+            const dist = Math.hypot(x - CX, y - CY) / MAXD;
+            const v = (p * 1.8 - dist) / 0.4; // <0 outside; ≥2 everywhere once p = 1
+            const t = bayer[y & 7][x & 7];
+            const c = v >= t + 1 ? INK : v >= t ? PLUM : null;
+            if (c) {
+              d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255;
+            } else {
+              d[i + 3] = 0;
+            }
+          }
+        }
+        ictx.putImageData(img, 0, 0);
+      };
+      const irisState = { p: 0 };
+      tl.fromTo(
+        irisState,
+        { p: 0 },
+        { p: 1, duration: 0.85, ease: "power2.in", onUpdate: () => paintIris(irisState.p), immediateRender: false },
+        4.55,
+      );
 
       window.__timelines["delete"] = tl;
     })();

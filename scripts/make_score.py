@@ -205,6 +205,10 @@ place(click(1.4), 14.28, gain=0.14)  # tap delete
 place(blip(900, 260, 0.2), 14.68, gain=0.26)  # the pop
 place(whoosh(0.3, rise=False), 14.9, gain=0.05)  # puff
 place(whoosh(0.5, rise=False), 15.0, gain=0.04)  # icons reflow
+place(blip(820, 1040, 0.08), 12.25, gain=0.07)  # "Press & hold" callout
+place(blip(820, 1040, 0.08), 13.8, gain=0.07)  # "Tap Delete" callout
+place(bell(81, 0.8), 14.98, gain=0.05)  # toast
+place(bell(88, 0.8), 15.06, gain=0.04)
 place(whoosh(0.95, rise=True), 15.55, gain=0.16)  # iris riser
 place(kick(1.2), 16.5, gain=0.6)  # landing
 

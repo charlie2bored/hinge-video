@@ -17,10 +17,16 @@ archived on whatships.com. Twenty seconds, no voiceover: a Hinge prompt gets a
 like, the relationship plays out as kinetic type, and the app gets deleted from
 the home screen. Ends on Hinge's line, "Designed to be deleted."
 
+## Customizations
+
+- UI from the user's kit: Watermelon UI and Beautiful UI components ported
+  from source; Ditther, MetalForge and Tokokino looks recreated by hand;
+  21st.dev unreachable. Details in README "UI kit".
+
 ## Notes
 
 - Inspiration pulled from whatships.com; see README for the specific films.
-- Two voices: Instrument Serif is the human one, Geist is the interface.
+- Two voices: Instrument Serif is the human one, Inter is the interface.
 - Palette: paper `#F3EEE7`, ink `#1D1519`, plum `#6D2E62`, blush `#E7C3D6`
   on the dark end card.
 - No official Hinge logo or assets. The wordmark is set in type.

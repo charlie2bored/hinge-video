@@ -13,10 +13,10 @@
       src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
     }
     @font-face {
-      font-family: "Geist";
+      font-family: "Inter";
       font-style: normal;
       font-weight: 100 900;
-      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+      src: url("assets/fonts/Inter-Variable.woff2") format("woff2");
     }
 
     #root {
@@ -24,7 +24,7 @@
       inset: 0;
       overflow: hidden;
       color: #1d1519;
-      font-family: "Geist", sans-serif;
+      font-family: "Inter", sans-serif;
     }
     #prompt-bg {
       position: absolute;
@@ -60,19 +60,22 @@
     #prompt-stack {
       position: absolute;
       left: 440px;
-      top: 196px;
+      top: 142px;
       width: 1040px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 22px;
     }
     #prompt-name {
       display: flex;
       align-items: baseline;
       gap: 20px;
+      height: 72px;
       font-size: 60px;
+      line-height: 72px;
       font-weight: 700;
       letter-spacing: -0.03em;
+      color: #010101;
     }
     #prompt-name small {
       font-size: 32px;
@@ -80,24 +83,24 @@
       letter-spacing: 0;
       color: #6a5e64;
     }
+
+    /* Watermelon UI card (card-swipe anatomy): r40, 1.6px #ECECEC, #FEFEFE, no shadow */
     #prompt-card {
       position: relative;
       width: 1040px;
-      height: 440px;
-      padding: 60px 72px 0;
-      border-radius: 36px;
-      background: #fffdfb;
-      box-shadow:
-        0 1px 0 rgba(29, 21, 25, 0.04),
-        0 30px 80px rgba(60, 20, 50, 0.12);
+      height: 380px;
+      padding: 56px 64px 0;
+      border-radius: 40px;
+      border: 1.6px solid #ececec;
+      background: #fefefe;
     }
     #prompt-question {
-      font-size: 34px;
-      font-weight: 500;
-      color: #4a3f45;
+      font-size: 32px;
+      line-height: 1.4;
+      color: #6a5e64;
     }
     #prompt-answer {
-      margin-top: 26px;
+      margin-top: 18px;
       width: 820px;
       font-family: "Instrument Serif", serif;
       font-size: 118px;
@@ -112,30 +115,31 @@
       vertical-align: -0.08em;
       background: #6d2e62;
     }
+    /* Watermelon icon tile (96 r24, 1.6px #ECECEC, 0 6px 20px rgba(0,0,0,.08)) at 1.3× */
     #prompt-heart-btn {
       position: absolute;
-      right: 48px;
-      bottom: 48px;
+      right: 44px;
+      bottom: 44px;
       width: 124px;
       height: 124px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1.5px solid #e8dfe4;
-      box-shadow: 0 10px 28px rgba(60, 20, 50, 0.14);
+      border-radius: 31px;
+      border: 2px solid #ececec;
+      background: #fefefe;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     #prompt-heart {
       position: relative;
-      width: 52px;
-      height: 52px;
+      width: 64px;
+      height: 64px;
     }
     #prompt-heart svg {
       position: absolute;
       inset: 0;
-      width: 52px;
-      height: 52px;
+      width: 64px;
+      height: 64px;
     }
     #prompt-heart-fill {
       opacity: 0;
@@ -157,6 +161,97 @@
       background: #6d2e62;
       opacity: 0;
     }
+
+    /* Beautiful UI ChatComposer (composer part) at 2.2× */
+    #prompt-composer {
+      width: 1040px;
+      height: 192px;
+      padding: 13px;
+      border-radius: 31px;
+      background: #ffffff;
+      box-shadow:
+        0 0 0 2px #ecedef,
+        0 18px 47px rgba(0, 0, 0, 0.03),
+        0 7.5px 19px rgba(0, 0, 0, 0.02),
+        0 4px 10.5px rgba(0, 0, 0, 0.02);
+      letter-spacing: -0.3px;
+    }
+    #prompt-composer-box {
+      height: 166px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 17.6px;
+      border-radius: 17.6px;
+      border: 2.2px solid #ecedef;
+      background: #f2f2f3;
+      box-shadow: 0 2.2px 4.4px rgba(0, 0, 0, 0.035);
+    }
+    #prompt-input {
+      position: relative;
+      height: 42px;
+      font-size: 30px;
+      line-height: 42px;
+      color: #1f2124;
+    }
+    #prompt-placeholder {
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+      color: #9a9da3;
+    }
+    #prompt-input-caret {
+      display: inline-block;
+      width: 2.5px;
+      height: 34px;
+      margin-left: 1px;
+      vertical-align: -6px;
+      background: #1f2124;
+      opacity: 0;
+    }
+    #prompt-toolbar {
+      display: flex;
+      justify-content: flex-end;
+    }
+    #prompt-arrow {
+      width: 62px;
+      height: 62px;
+      border-radius: 17.6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e0e2e5;
+      color: #62656b;
+    }
+
+    /* Watermelon ShimmerButton at 1.8×: #171717 pill, sheen sweeps on hover */
+    #prompt-send-row {
+      display: flex;
+      justify-content: flex-end;
+    }
+    #prompt-send {
+      position: relative;
+      overflow: hidden;
+      height: 86px;
+      padding: 21.6px 43.2px;
+      border-radius: 9999px;
+      background: #171717;
+      color: #fafafa;
+      font-size: 28.8px;
+      line-height: 43.2px;
+      font-weight: 500;
+    }
+    #prompt-send span {
+      position: relative;
+      z-index: 1;
+    }
+    #prompt-sheen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right in oklab, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+    }
+
     .prompt-touch {
       position: absolute;
       width: 84px;
@@ -167,46 +262,39 @@
       opacity: 0;
     }
     #prompt-touch-heart {
-      left: 1328px;
-      top: 582px;
+      left: 1332px;
+      top: 468px;
     }
-    #prompt-comment {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 1040px;
-      height: 112px;
-      padding: 0 16px 0 44px;
-      border-radius: 56px;
-      background: #fffdfb;
-      border: 1.5px solid #e8dfe4;
+    #prompt-touch-send {
+      left: 1333px;
+      top: 853px;
+      background: rgba(255, 255, 255, 0.28);
+      border-color: rgba(255, 255, 255, 0.7);
     }
-    #prompt-comment-text {
-      position: relative;
-      font-size: 38px;
-    }
-    #prompt-placeholder {
+
+    /* Beautiful UI ThinkingState: grey label with a dark band sweeping through it */
+    #prompt-status {
       position: absolute;
       left: 0;
-      top: 0;
-      white-space: nowrap;
-      color: #6a5e64;
-    }
-    #prompt-send {
-      width: 240px;
-      height: 80px;
-      border-radius: 40px;
-      background: #6d2e62;
-      color: #f3eee7;
-      font-size: 30px;
-      font-weight: 600;
+      right: 0;
+      top: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 20px;
+      opacity: 0;
     }
-    #prompt-touch-send {
-      left: 1302px;
-      top: 774px;
+    #prompt-status-label {
+      font-size: 44px;
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: -0.44px;
+      color: transparent;
+      background-image: linear-gradient(90deg, #9a9da3 35%, #1f2124 50%, #9a9da3 65%);
+      background-size: 200% 100%;
+      background-position: 150% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
     }
   </style>
 
@@ -221,7 +309,7 @@
     <div id="prompt-bg" class="clip" data-start="0" data-duration="5" data-track-index="0">
       <div id="prompt-glow"></div>
       <svg id="prompt-ghost" viewBox="0 0 24 24" fill="none" stroke="rgba(109, 46, 98, 0.08)" stroke-width="0.35">
-        <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+        <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
       </svg>
     </div>
 
@@ -236,12 +324,13 @@
           <div id="prompt-answer"><span id="prompt-typed"></span><span id="prompt-caret"></span></div>
 
           <div id="prompt-heart-btn">
+            <!-- Hugeicons FavouriteIcon (MIT), the icon set Watermelon ships with -->
             <div id="prompt-heart">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#1d1519" stroke-width="1.7" stroke-linejoin="round">
-                <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
               </svg>
-              <svg id="prompt-heart-fill" viewBox="0 0 24 24" fill="#6d2e62">
-                <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+              <svg id="prompt-heart-fill" viewBox="0 0 24 24" fill="#6d2e62" stroke="#6d2e62" stroke-width="1.5" stroke-linejoin="round">
+                <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
               </svg>
             </div>
             <div class="prompt-tick" style="transform: rotate(0deg)"><i></i></div>
@@ -255,12 +344,29 @@
           </div>
         </div>
 
-        <div id="prompt-comment">
-          <div id="prompt-comment-text">
-            <span id="prompt-placeholder">Add a comment</span><span id="prompt-comment-typed"></span>
+        <div id="prompt-composer">
+          <div id="prompt-composer-box">
+            <div id="prompt-input">
+              <span id="prompt-placeholder">Add a comment</span><span id="prompt-comment-typed"></span><span id="prompt-input-caret"></span>
+            </div>
+            <div id="prompt-toolbar">
+              <div id="prompt-arrow">
+                <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+              </div>
+            </div>
           </div>
-          <div id="prompt-send">Send like</div>
         </div>
+
+        <div id="prompt-send-row">
+          <div id="prompt-send"><div id="prompt-sheen"></div><span>Send like</span></div>
+        </div>
+      </div>
+
+      <div id="prompt-status">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="#62656b">
+          <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
+        </svg>
+        <div id="prompt-status-label">Maya is typing</div>
       </div>
 
       <div id="prompt-touch-heart" class="prompt-touch"></div>
@@ -301,7 +407,6 @@
       tl.fromTo("#prompt-card", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.08);
       tl.fromTo("#prompt-question", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.45);
       tl.fromTo("#prompt-heart-btn", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.55);
-      tl.set("#prompt-comment", { opacity: 0, y: 40 }, 0);
 
       // Caret waits, types the answer, waits again.
       tl.fromTo("#prompt-caret", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0.5);
@@ -310,28 +415,48 @@
       tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.14 }, 2.45);
       tl.to("#prompt-caret", { opacity: 0, duration: 0.15 }, 2.75);
 
-      // Tap the heart.
+      // Tap the heart tile.
       tl.fromTo("#prompt-touch-heart", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power2.out" }, 2.4);
       tl.to("#prompt-touch-heart", { scale: 0.78, duration: 0.08, ease: "power2.in" }, 2.62);
-      tl.to("#prompt-heart-btn", { scale: 0.9, duration: 0.08, ease: "power2.in" }, 2.62);
+      tl.to("#prompt-heart-btn", { scale: 0.92, duration: 0.08, ease: "power2.in" }, 2.62);
       tl.to("#prompt-heart-btn", { scale: 1, duration: 0.5, ease: "elastic.out(1.1, 0.4)" }, 2.7);
       tl.to("#prompt-touch-heart", { scale: 1.3, opacity: 0, duration: 0.3, ease: "power2.out" }, 2.72);
       tl.fromTo("#prompt-heart-fill", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 2.7);
       tl.fromTo("#prompt-heart", { scale: 0.7 }, { scale: 1, duration: 0.55, ease: "back.out(3)", immediateRender: false }, 2.7);
       tl.fromTo(".prompt-tick i", { y: 22, opacity: 1 }, { y: -18, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.72);
 
-      // Add a comment, send the like.
-      tl.to("#prompt-comment", { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 2.95);
+      // Composer + Send like arrive (Beautiful UI fade-up: 8px, 380ms, ease-out-strong).
+      tl.fromTo("#prompt-composer", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 2.95);
+      tl.fromTo("#prompt-send-row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 3.02);
+
+      // Focus the composer and type the comment; the send arrow wakes up on the first character.
+      tl.to("#prompt-composer-box", { borderColor: "#e0e2e5", duration: 0.15, ease: "power2.inOut" }, 3.15);
+      tl.set("#prompt-input-caret", { opacity: 1 }, 3.15);
       tl.to("#prompt-placeholder", { opacity: 0, duration: 0.01 }, 3.28);
       typeInto($("#prompt-comment-typed"), "Ask me one.", 3.3, 0.5);
-      tl.fromTo("#prompt-touch-send", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" }, 3.82);
-      tl.to(["#prompt-touch-send", "#prompt-send"], { scale: 0.92, duration: 0.08, ease: "power2.in" }, 3.98);
-      tl.to("#prompt-send", { scale: 1, duration: 0.2, ease: "back.out(3)" }, 4.06);
+      tl.to("#prompt-arrow", { backgroundColor: "#1f2124", color: "#ffffff", duration: 0.2, ease: "power2.inOut" }, 3.3);
+      tl.to("#prompt-input-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.12 }, 3.85);
+
+      // Hover "Send like": the shimmer sweeps once (700ms, Tailwind ease) and the shadow lifts; then press.
+      tl.fromTo("#prompt-touch-send", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" }, 3.66);
+      tl.fromTo("#prompt-sheen", { xPercent: -100 }, { xPercent: 100, duration: 0.7, ease: "power2.inOut" }, 3.7);
+      tl.fromTo(
+        "#prompt-send",
+        { boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 0 rgba(0,0,0,0)" },
+        { boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)", duration: 0.3, ease: "power2.inOut" },
+        3.7,
+      );
+      tl.to(["#prompt-touch-send", "#prompt-send"], { scale: 0.96, duration: 0.08, ease: "power2.out" }, 3.98);
+      tl.to("#prompt-send", { scale: 1, duration: 0.15, ease: "power2.out" }, 4.06);
       tl.to("#prompt-touch-send", { scale: 1.3, opacity: 0, duration: 0.25, ease: "power2.out" }, 4.06);
 
       // The like leaves: the whole profile flies up and away.
-      tl.to("#prompt-stack", { y: -1000, rotation: -5, scale: 0.92, duration: 0.62, ease: "power3.in" }, 4.12);
+      tl.to("#prompt-stack", { y: -1100, rotation: -5, scale: 0.92, duration: 0.62, ease: "power3.in" }, 4.12);
       tl.to("#prompt-chapter", { opacity: 0, duration: 0.3, ease: "power2.out" }, 4.4);
+
+      // Cliffhanger: "Maya is typing" with the ThinkingState shimmer (1.4s linear sweep).
+      tl.fromTo("#prompt-status", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 4.3);
+      tl.to("#prompt-status-label", { backgroundPosition: "-50% 50%", duration: 1.4, ease: "none" }, 3.95);
 
       window.__timelines["prompt"] = tl;
     })();

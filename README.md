@@ -12,12 +12,27 @@ The idea comes from Hinge's own line: the goal of a dating app is to stop needin
 
 | Time | Scene | What happens |
 | --- | --- | --- |
-| 0–5s | **01 · The prompt** | A Hinge-style prompt card. *"I'll fall for you if… you ask a second question."* The heart gets tapped, a comment is typed (*"Ask me one."*), and the like flies off screen. |
-| 5–11s | **02 · The part in between** | Kinetic type, one word per beat: *Like. → Match. → First date. → Second date. → Meet the friends. → Us.* A day counter and progress rail run from Day 1 to Day 214. |
-| 11–16.5s | **03 · The goal** | *"Found your person?"* A phone home screen: long-press, the icons jiggle, then "Delete 'Hinge'? · Mission accomplished." The app is deleted, the other icons shuffle over, and the empty slot opens up into… |
-| 16.5–20s | **End card** | *Designed to be deleted.* / Hinge |
+| 0–5s | **01 · The prompt** | A Hinge-style prompt card. *"I'll fall for you if… you ask a second question."* The heart gets tapped, a comment is typed (*"Ask me one."*), "Send like" shimmers and gets pressed, and the profile flies off screen. *"Maya is typing…"* |
+| 5–11s | **02 · The part in between** | Kinetic type, one word per beat: *Like. → Match. → First date. → Second date. → Meet the friends. → Us.* A split-flap day counter flips from 001 to 214. |
+| 11–16.5s | **03 · The goal** | *"Found your person?"* A phone on a demo stage: press & hold, the icons jiggle, and an exit question asks *"Delete Hinge?"*. The answer is *"We met on Hinge"*, then Delete. "Hinge deleted", the icons shuffle over, and the empty slot dithers open into… |
+| 16.5–20s | **End card** | *Designed to be deleted.* / Hinge, in liquid metal |
 
-The type uses two voices. Instrument Serif is the human voice (the prompts and the story). Geist is the interface voice (the UI). The palette is paper `#F3EEE7`, ink `#1D1519` and plum `#6D2E62`, with blush `#E7C3D6` on the dark end card.
+The type uses two voices. Instrument Serif is the human voice (the prompts and the story). Inter is the interface voice (the UI, matching both component libraries below). The palette is paper `#F3EEE7`, ink `#1D1519` and plum `#6D2E62`, with blush `#E7C3D6` on the dark end card.
+
+## UI kit
+
+The on-screen UI is built from these sites. Watermelon UI and Beautiful UI have public MIT source, so their components are ported property by property (sizes, colors, shadows, easings, keyframe timings) from source and computed styles, then re-expressed as seekable GSAP. The other tools are closed web apps, so their looks are recreated by hand.
+
+| Site | Used for | How |
+| --- | --- | --- |
+| [Watermelon UI](https://ui.watermelon.sh) | Prompt card + heart tile, **Send like** shimmer button, split-flap **flip clock**, **iPhone frame**, **dock**, the long-press pop | Ported from [`watermellon-registry`](https://github.com/WatermelonCorp/watermellon-registry): card-swipe card/icon tile, `shimmer-button` (700ms sheen), `flip-clock` (300ms ease-in top flap, 300ms ease-out bottom flap), `device.tsx` SVG (verbatim paths), `dock`, and the dock's k550/c15 click spring solved analytically. Icons are Hugeicons, its icon set. |
+| [Beautiful UI](https://beautifului.dev) | Comment **composer**, "Maya is typing" **shimmer**, the **"Delete Hinge?"** exit question, the "Hinge deleted" pill, the streamed line in scene 03 | Ported from [`beautiful-ui`](https://github.com/slev12397/beautiful-ui): `ChatComposer`, `ThinkingState` (1.4s gradient sweep), `ApprovalCard` (fade-up 8px/380ms, radio, resolved pill), `StreamingText` (one word per 55ms). |
+| [Ditther](https://ditther.com) | The **dithered iris** out of the deleted app's slot, and the end card's dithered glow | Hand-built Bayer 8×8 ordered dither on a canvas, repainted per frame from time alone. |
+| [MetalForge](https://metalforge.xyz) | The **liquid-metal** Hinge app icon and the chrome wordmark | Hand-built with CSS: a chrome gradient ramp plus a traveling specular band. |
+| [Tokokino](https://tokokino.com) | Product-demo staging in scene 03: gradient **stage card**, **"Press & hold" / "Tap Delete" callouts**, focus ring, zoom-to-region | Hand-built in the style of a demo editor. |
+| [21st.dev](https://21st.dev) | Not used | Its components are served only from its own registry, which wasn't reachable from the build machine, and no public repo mirrors them. |
+
+Small deviations from the sources: the approval card's Delete button uses the library's own `--red` token (the source primary is blue), and the "Hinge deleted" text is darkened from `#199A4D` to `#137A3C` to pass WCAG AA. See [CREDITS.md](CREDITS.md) for licenses.
 
 ## Inspiration (from [whatships.com](https://whatships.com))
 
@@ -37,12 +52,12 @@ What Ships is an archive of startup launch films posted on X. These are the ones
 
 ```
 index.html                 host: four scene slots + the audio track
-compositions/prompt.html   01 · the prompt
-compositions/beats.html    02 · kinetic type
-compositions/delete.html   03 · home screen + delete + iris
+compositions/prompt.html   01 · the prompt (Watermelon card, Beautiful UI composer + shimmer)
+compositions/beats.html    02 · kinetic type + Watermelon flip clock
+compositions/delete.html   03 · Watermelon device + dock, ApprovalCard, callouts, dither iris
 compositions/endcard.html  end card
 scripts/make_score.py      synthesizes assets/audio/score.mp3 (numpy, seeded, license-free)
-assets/fonts/              Instrument Serif + Geist (OFL), embedded via @font-face
+assets/fonts/              Instrument Serif, Inter, Geist Mono (OFL), embedded via @font-face
 vendor/gsap.min.js         GSAP 3.14.2, vendored so renders work offline
 ```
 
