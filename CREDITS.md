@@ -37,6 +37,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+**product-film-skill** (https://github.com/Rieranthony/product-film-skill)
+The craft rules this cut follows, the spring and punchline recipes (ported to GSAP), and `scripts/product-film/beats.py` and `verify.py`, copied unchanged.
+
+```
+product-film-skill: MIT License, Copyright (c) 2026 Rieranthony
+```
+
 ## Styles recreated by hand (no code used)
 
 Ditther (dither), MetalForge (liquid metal), Tokokino (demo staging and callouts).

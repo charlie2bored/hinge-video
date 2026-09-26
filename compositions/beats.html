@@ -43,16 +43,6 @@
       background: #1d1519;
       opacity: 0;
     }
-    #beats-chapter {
-      position: absolute;
-      left: 96px;
-      top: 72px;
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #6a5e64;
-    }
     /* Day counter: a port of Watermelon UI's flip-clock (split-flap digits) */
     #beats-clock {
       position: absolute;
@@ -142,84 +132,42 @@
       background: rgba(255, 255, 255, 0.5);
       z-index: 3;
     }
-    .beats-word {
+    /* Punchlines (product-film kit): every word holds its slot from the start, so a
+       centred line never re-centres; each lands with a 16px blur and a 36px rise. */
+    .beats-card {
       position: absolute;
       inset: 0;
+      padding-top: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 0.26em;
       font-family: "Instrument Serif", serif;
-      font-size: 280px;
-      line-height: 1;
-      letter-spacing: -0.03em;
+      font-size: 180px; /* Instrument Serif runs small: optically the skill's 160px */
+      line-height: 1.08;
+      letter-spacing: -0.02em;
       white-space: nowrap;
+    }
+    .beats-w {
+      display: inline-flex;
+      align-items: center;
       opacity: 0;
     }
-    .beats-word span {
-      display: inline-block;
-    }
-    .beats-glyph {
-      display: inline-block;
-      white-space: pre;
-    }
-    .beats-word em {
-      display: inline-block;
+    .beats-w.accent {
       font-style: italic;
       color: #6d2e62;
     }
-    #beats-w2-mask {
-      display: block;
-      overflow: hidden;
-      padding: 0 0.08em 0.08em;
-    }
-    #beats-w3,
-    #beats-w4 {
-      font-size: 240px;
-      gap: 0.22em;
-    }
-    #beats-w5 {
-      font-size: 200px;
+    #beats-c5 {
       color: #f3eee7;
     }
-    #beats-w6 {
-      font-size: 340px;
+    .beats-mark {
+      display: inline-flex;
+      width: 0.82em;
+      height: 0.82em;
     }
-    #beats-w6 em {
-      padding-right: 0.06em;
-    }
-    #beats-heart {
-      position: absolute;
-      left: 1170px;
-      top: 360px;
-      width: 96px;
-      height: 96px;
-      opacity: 0;
-    }
-    #beats-rail {
-      position: absolute;
-      left: 160px;
-      top: 858px;
-      width: 1600px;
-      height: 2px;
-      background: rgba(29, 21, 25, 0.14);
-    }
-    #beats-rail-fill {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 1600px;
-      height: 2px;
-      background: #6d2e62;
-      transform-origin: 0 50%;
-    }
-    .beats-dot {
-      position: absolute;
-      top: -7px;
-      width: 16px;
-      height: 16px;
-      margin-left: -8px;
-      border-radius: 50%;
-      background: #6d2e62;
+    .beats-mark svg {
+      width: 100%;
+      height: 100%;
     }
   </style>
 
@@ -231,13 +179,11 @@
     data-width="1920"
     data-height="1080"
   >
-    <div id="beats-bg" class="clip" data-start="0" data-duration="6" data-track-index="0">
+    <div id="beats-bg" class="clip" data-start="0" data-duration="6" data-track-index="0" data-layout-allow-occlusion>
       <div id="beats-dark"></div>
     </div>
 
     <div id="beats-scene" class="clip" data-start="0" data-duration="6" data-track-index="1">
-      <div id="beats-chapter">02 — The part in between</div>
-
       <div id="beats-clock">
         <div id="beats-clock-label">Day</div>
         <div class="beats-flip"></div>
@@ -245,27 +191,26 @@
         <div class="beats-flip"></div>
       </div>
 
-      <div class="beats-word" id="beats-w1"><span>Like.</span></div>
-      <div class="beats-word" id="beats-w2">
-        <span id="beats-w2-mask"><span id="beats-w2-inner">Match.</span></span>
+      <!-- Punchline cards: data-at / data-out are cue names from cues.js (":offset" in seconds) -->
+      <div class="beats-card" id="beats-c1" data-out="match:-0.1">
+        <span class="beats-mark" id="beats-like-mark"><svg viewBox="0 0 24 24" fill="#6d2e62" stroke="#6d2e62" stroke-width="1.5" stroke-linejoin="round"><path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" /></svg></span>
+        <span class="beats-w" data-at="like">Like.</span>
       </div>
-      <div class="beats-word" id="beats-w3"><span>First</span><span>date.</span></div>
-      <div class="beats-word" id="beats-w4"><em id="beats-second">Second</em><span>date.</span></div>
-      <div class="beats-word" id="beats-w5"><span id="beats-friends">Meet the friends.</span></div>
-      <div class="beats-word" id="beats-w6"><em id="beats-us">Us.</em></div>
-
-      <svg id="beats-heart" viewBox="0 0 24 24" fill="#6d2e62">
-        <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
-      </svg>
-
-      <div id="beats-rail">
-        <div id="beats-rail-fill"></div>
-        <div class="beats-dot" style="left: 0px"></div>
-        <div class="beats-dot" style="left: 320px"></div>
-        <div class="beats-dot" style="left: 640px"></div>
-        <div class="beats-dot" style="left: 960px"></div>
-        <div class="beats-dot" style="left: 1280px"></div>
-        <div class="beats-dot" style="left: 1600px"></div>
+      <div class="beats-card" id="beats-c2" data-out="first:-0.1">
+        <span class="beats-w" data-at="match">Match.</span>
+      </div>
+      <div class="beats-card" id="beats-c3" data-out="second:-0.1">
+        <span class="beats-w" data-at="first">First</span><span class="beats-w" data-at="first:0.5">date.</span>
+      </div>
+      <div class="beats-card" id="beats-c4" data-out="friends:-0.1">
+        <span class="beats-w accent" data-at="second">Second</span><span class="beats-w" data-at="second:0.25">date.</span>
+      </div>
+      <div class="beats-card" id="beats-c5" data-out="us:-0.1">
+        <span class="beats-w" data-at="friends">Meet</span><span class="beats-w" data-at="friends:0.25">the</span><span class="beats-w" data-at="friends:0.5">friends.</span>
+      </div>
+      <div class="beats-card" id="beats-c6">
+        <span class="beats-w accent" data-at="us">Us.</span>
+        <span class="beats-w beats-mark" data-at="usHeart"><svg viewBox="0 0 24 24" fill="#6d2e62" stroke="#6d2e62" stroke-width="1.5" stroke-linejoin="round"><path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" /></svg></span>
       </div>
     </div>
   </div>
@@ -273,19 +218,43 @@
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
-      const BEAT = 1; // one word per second, on the downbeat
+      const C = window.CUES.beats;
+      const T0 = window.CUES.scenes.beats.start;
+      const at = (name, offset = 0) => C[name] - T0 + offset;
+      const cue = (spec) => {
+        const [name, offset] = spec.split(":");
+        return at(name, Number(offset || 0));
+      };
 
-      // Hard cuts: each word owns exactly one beat.
-      for (let i = 1; i <= 6; i++) {
-        const t = (i - 1) * BEAT;
-        tl.set(`#beats-w${i}`, { opacity: 1 }, t);
-        if (i < 6) tl.set(`#beats-w${i}`, { opacity: 0 }, t + BEAT);
-      }
+      // Punchlines: each word lands in 0.3s on cubic-bezier(.22,1,.36,1) (≈ power4.out);
+      // a card leaves with a quick blur just before the next one's first word.
+      document.querySelectorAll(".beats-card").forEach((card) => {
+        card.querySelectorAll(".beats-w").forEach((w) => {
+          tl.fromTo(
+            w,
+            { opacity: 0, y: 36, filter: "blur(16px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power4.out" },
+            cue(w.dataset.at),
+          );
+        });
+        if (card.dataset.out) {
+          tl.fromTo(
+            card,
+            { opacity: 1, y: 0, filter: "blur(0px)" },
+            { opacity: 0, y: -16, filter: "blur(12px)", duration: 0.18, ease: "none", immediateRender: false },
+            cue(card.dataset.out),
+          );
+        }
+      });
+      // The heart that travelled in from the last scene takes its slot beside "Like."
+      tl.fromTo("#beats-like-mark", { opacity: 0 }, { opacity: 1, duration: 0.01 }, at("likeMark"));
 
       // Flip-clock day counter. One static stack per transition (prev → next),
       // so every frame is a pure function of time: the top flap falls away
       // showing the old digit, then the bottom flap swings down with the new one.
-      const DAYS = ["000", "001", "002", "009", "016", "058", "214"];
+      // Time keeps passing on the off-beats (tick1, tick2), so no beat sits idle.
+      const DAYS = ["000", "001", "002", "005", "009", "016", "030", "058", "214"];
+      const FLIPS = ["like", "match", "tick1", "first", "second", "tick2", "friends", "us"].map((n) => at(n));
       const FLIP = 0.3; // per half, as in the original component
       const half = (pos, flap, digit) =>
         `<div class="beats-half ${pos}${flap ? " flap" : ""}"><span data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow>${digit}</span></div>`;
@@ -299,9 +268,9 @@
             half("bottom", true, next) + half("top", true, prev) +
             '<div class="beats-divider"></div>';
           unit.appendChild(stack);
-          const t = (k - 1) * BEAT;
+          const t = FLIPS[k - 1];
           tl.set(stack, { opacity: 1 }, t);
-          if (k < DAYS.length - 1) tl.set(stack, { opacity: 0 }, t + BEAT);
+          if (k < DAYS.length - 1) tl.set(stack, { opacity: 0 }, FLIPS[k]);
           const flapTop = stack.querySelector(".flap.top");
           const flapBottom = stack.querySelector(".flap.bottom");
           if (prev === next) {
@@ -314,66 +283,12 @@
         }
       });
 
-      // Progress rail fills in steps; each dot pops as its beat lands.
-      tl.fromTo("#beats-rail-fill", { scaleX: 0 }, { scaleX: 0.001, duration: 0.01 }, 0);
-      document.querySelectorAll(".beats-dot").forEach((dot, i) => {
-        tl.fromTo(dot, { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, i * BEAT);
-        if (i > 0) tl.to("#beats-rail-fill", { scaleX: i / 5, duration: 0.4, ease: "power3.out" }, i * BEAT);
-      });
+      // Lights out for "Meet the friends."; back on for "Us."
+      tl.set("#beats-dark", { opacity: 1 }, at("friends"));
+      tl.set("#beats-dark", { opacity: 0 }, at("us"));
+      tl.set("#beats-clock-label", { color: "#c9b9c2" }, at("friends"));
+      tl.set("#beats-clock-label", { color: "#6a5e64" }, at("us"));
 
-      // 1 · Like. — oversized, settles down to size.
-      tl.fromTo("#beats-w1 span", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0);
-      tl.to("#beats-w1 span", { scale: 0.97, duration: 0.55, ease: "none" }, 0.45);
-
-      // 2 · Match. — slides up out of a mask.
-      tl.fromTo("#beats-w2-inner", { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 1);
-
-      // 3 · First date. — words blur into focus, one after the other.
-      tl.fromTo(
-        "#beats-w3 span",
-        { opacity: 0, y: 30, filter: "blur(18px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out", stagger: 0.12 },
-        2,
-      );
-
-      // 4 · Second date. — only the first word swaps; it punches in.
-      tl.fromTo("#beats-second", { scale: 1.25 }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 3);
-
-      // 5 · Meet the friends. — the room goes dark, the letters pull together.
-      tl.set("#beats-dark", { opacity: 1 }, 4);
-      tl.set("#beats-dark", { opacity: 0 }, 5);
-      tl.set(["#beats-chapter", "#beats-clock-label"], { color: "#c9b9c2" }, 4);
-      tl.set(["#beats-chapter", "#beats-clock-label"], { color: "#6a5e64" }, 5);
-      tl.set("#beats-rail-fill", { backgroundColor: "#e7c3d6" }, 4);
-      tl.set("#beats-rail-fill", { backgroundColor: "#6d2e62" }, 5);
-      tl.set(".beats-dot", { backgroundColor: "#e7c3d6" }, 4);
-      tl.set(".beats-dot", { backgroundColor: "#6d2e62" }, 5);
-      const friends = document.getElementById("beats-friends");
-      const glyphs = [...friends.textContent].map((ch) => {
-        const g = document.createElement("span");
-        g.className = "beats-glyph";
-        g.textContent = ch;
-        return g;
-      });
-      friends.replaceChildren(...glyphs);
-      const mid = (glyphs.length - 1) / 2;
-      glyphs.forEach((g, i) => {
-        tl.fromTo(
-          g,
-          { x: (i - mid) * 46, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-          4,
-        );
-      });
-
-      // 6 · Us. — spring pop, and a heart lands beside it.
-      tl.fromTo("#beats-us", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2.2)" }, 5);
-      tl.fromTo(
-        "#beats-heart",
-        { scale: 0, rotation: -25, opacity: 0 },
-        { scale: 1, rotation: 10, opacity: 1, duration: 0.5, ease: "back.out(3)" },
-        5.2,
-      );
 
       window.__timelines["beats"] = tl;
     })();

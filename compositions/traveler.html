@@ -1,0 +1,63 @@
+<template id="traveler-template">
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    #traveler-heart {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 46px;
+      height: 46px;
+      transform-origin: 0 0;
+    }
+  </style>
+
+  <!-- Magic move across the cut (product-film kit/move.ts): the liked heart glides from
+       "Maya is typing" into its slot beside "Like." on a spring, k150 c20. -->
+  <div id="root" data-composition-id="traveler" data-start="0" data-duration="0.75" data-width="1920" data-height="1080">
+    <div id="traveler-clip" class="clip" data-start="0" data-duration="0.75" data-track-index="0">
+      <svg id="traveler-heart" viewBox="0 0 24 24" fill="#6d2e62" stroke="#6d2e62" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const START = CUES.prompt.handoff, END = CUES.beats.likeMark; // global; this clip starts at START
+      // Measured ends: the status slot in scene 01 (debug probe) and the heart's
+      // slot beside "Like." in scene 02 (decoded pixels of a still, 0.82em of 180px).
+      const FROM = { x: 777.1, y: 510, s: 46 };
+      const TO = { x: 726.4, y: 541.2, s: 147.6 };
+      const step = (t, k = 150, c = 20) => {
+        if (t <= 0) return 0;
+        const w = Math.sqrt(k), z = c / (2 * w), wd = w * Math.sqrt(1 - z * z);
+        return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + ((z * w) / wd) * Math.sin(wd * t));
+      };
+      const hop = { u: 0 };
+      tl.fromTo(
+        hop,
+        { u: 0 },
+        {
+          u: 1,
+          duration: END - START,
+          ease: "none",
+          onUpdate: () => {
+            const e = step(hop.u * (END - START));
+            gsap.set("#traveler-heart", {
+              x: FROM.x + (TO.x - FROM.x) * e,
+              y: FROM.y + (TO.y - FROM.y) * e,
+              scale: (FROM.s + (TO.s - FROM.s) * e) / FROM.s,
+            });
+          },
+        },
+        0,
+      );
+      window.__timelines["traveler"] = tl;
+    })();
+  </script>
+</template>

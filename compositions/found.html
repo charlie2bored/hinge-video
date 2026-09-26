@@ -1,0 +1,159 @@
+<template id="found-template">
+  <style>
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: normal;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: italic;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url("assets/fonts/Inter-Variable.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #1d1519;
+      font-family: "Inter", sans-serif;
+    }
+    #found-bg {
+      position: absolute;
+      inset: 0;
+      background: #f3eee7;
+    }
+    /* Bar 7: a punchline card (words land one by one, slots kept), then the
+       streamed line. The phone scene after it carries no captions. */
+    #found-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+    }
+    #found-line {
+      display: flex;
+      gap: 0.26em;
+      font-family: "Instrument Serif", serif;
+      font-size: 180px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .found-w {
+      display: inline-block;
+      opacity: 0;
+    }
+    .found-w.accent {
+      font-style: italic;
+      color: #6d2e62;
+    }
+    #found-sub {
+      font-size: 44px;
+      line-height: 1.625;
+      color: #4a3f45;
+    }
+
+    /* Beautiful UI StreamingText caret */
+    .found-caret {
+      position: relative;
+      display: inline-block;
+      width: 0;
+      height: 1em;
+    }
+    .found-caret i {
+      position: absolute;
+      left: 4px;
+      bottom: -0.02em;
+      width: 4px;
+      height: 0.9em;
+      border-radius: 9999px;
+      background: #1d1519;
+      opacity: 0;
+    }
+    .found-word {
+      opacity: 0;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="found"
+    data-start="0"
+    data-duration="2"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div id="found-bg" class="clip" data-start="0" data-duration="2" data-track-index="0"></div>
+    <div id="found-scene" class="clip" data-start="0" data-duration="2" data-track-index="1">
+      <div id="found-card">
+        <div id="found-line">
+          <span class="found-w" data-at="found">Found</span><span class="found-w" data-at="found:0.25">your</span><span class="found-w accent" data-at="found:0.5">person?</span>
+        </div>
+        <div id="found-sub">Then you know what to do.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const C = window.CUES.found;
+      const T0 = window.CUES.scenes.found.start;
+      const at = (name, offset = 0) => C[name] - T0 + offset;
+      const cue = (spec) => {
+        const [name, offset] = spec.split(":");
+        return at(name, Number(offset || 0));
+      };
+
+      // Punchline: each word lands in 0.3s (16px blur, 36px rise, ≈ cubic-bezier(.22,1,.36,1)).
+      document.querySelectorAll(".found-w").forEach((w) => {
+        tl.fromTo(
+          w,
+          { opacity: 0, y: 36, filter: "blur(16px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power4.out" },
+          cue(w.dataset.at),
+        );
+      });
+
+      // The second line streams like Beautiful UI's StreamingText: one word every
+      // 55ms, no per-word fade, a solid caret riding the last word, gone when done.
+      const sub = document.getElementById("found-sub");
+      const words = sub.textContent.trim().split(" ");
+      sub.innerHTML = words
+        .map((w) => `<span class="found-word">${w}<span class="found-caret"><i></i></span> </span>`)
+        .join("");
+      const STEP = 0.055;
+      const wordEls = sub.querySelectorAll(".found-word");
+      const carets = sub.querySelectorAll(".found-caret i");
+      wordEls.forEach((w, i) => {
+        const t = at("stream") + i * STEP;
+        tl.set(w, { opacity: 1 }, t);
+        if (i === 0) tl.fromTo(carets[0], { opacity: 0 }, { opacity: 1, duration: STEP * 0.9, ease: "power1.out" }, t);
+        else tl.set(carets[i], { opacity: 1 }, t);
+        tl.set(carets[i], { opacity: 0 }, i < words.length - 1 ? t + STEP : at("stream", 0.5));
+      });
+
+      // The card leaves with a quick blur, just before the phone's bar.
+      tl.fromTo(
+        "#found-card",
+        { opacity: 1, y: 0, filter: "blur(0px)" },
+        { opacity: 0, y: -16, filter: "blur(12px)", duration: 0.18, ease: "none", immediateRender: false },
+        at("cardOut"),
+      );
+
+      window.__timelines["found"] = tl;
+    })();
+  </script>
+</template>

@@ -4,3 +4,5 @@ snapshots/
 .thumbnails/
 *.wav
 .DS_Store
+renders/*/master-240.mp4
+renders/*/blurred-60.mov

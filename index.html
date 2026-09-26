@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=1920, height=1080" />
     <title>Hinge — Designed to be deleted</title>
     <script src="vendor/gsap.min.js"></script>
+    <script src="cues.js"></script>
+    <script src="assets/icons.js"></script>
     <style>
       * {
         margin: 0;
@@ -36,53 +38,67 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="20"
+      data-duration="24"
       data-width="1920"
       data-height="1080"
     >
-      <!-- 01 · a prompt gets a like (0–5s) -->
+      <!-- Scene slots sit on bars (120 BPM, a bar is 2s); cues.js is the source of truth
+           and scripts/beatsheet.mjs fails if these drift from it. -->
+      <!-- 01 · a prompt gets a like (bars 1–3) -->
       <div
         id="el-prompt"
         data-composition-id="prompt"
         data-composition-src="compositions/prompt.html"
         data-start="0"
-        data-duration="5"
-        data-track-index="1"
-        data-width="1920"
-        data-height="1080"
-      ></div>
-
-      <!-- 02 · the relationship as kinetic type (5–11s) -->
-      <div
-        id="el-beats"
-        data-composition-id="beats"
-        data-composition-src="compositions/beats.html"
-        data-start="5"
         data-duration="6"
         data-track-index="1"
         data-width="1920"
         data-height="1080"
       ></div>
 
-      <!-- 03 · the app gets deleted (11–16.5s) -->
+      <!-- 02 · the relationship, word by word (bars 4–6) -->
       <div
-        id="el-delete"
-        data-composition-id="delete"
-        data-composition-src="compositions/delete.html"
-        data-start="11"
-        data-duration="5.5"
+        id="el-beats"
+        data-composition-id="beats"
+        data-composition-src="compositions/beats.html"
+        data-start="6"
+        data-duration="6"
         data-track-index="1"
         data-width="1920"
         data-height="1080"
       ></div>
 
-      <!-- 04 · end card (16.5–20s) -->
+      <!-- 03 · found your person? (bar 7) -->
+      <div
+        id="el-found"
+        data-composition-id="found"
+        data-composition-src="compositions/found.html"
+        data-start="12"
+        data-duration="2"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- 04 · delete the app (bars 8–10) -->
+      <div
+        id="el-delete"
+        data-composition-id="delete"
+        data-composition-src="compositions/delete.html"
+        data-start="14"
+        data-duration="6"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- 05 · end card (bars 11–12) -->
       <div
         id="el-endcard"
         data-composition-id="endcard"
         data-composition-src="compositions/endcard.html"
-        data-start="16.5"
-        data-duration="3.5"
+        data-start="20"
+        data-duration="4"
         data-track-index="1"
         data-width="1920"
         data-height="1080"
@@ -93,10 +109,22 @@
         id="score"
         src="assets/audio/score.mp3"
         data-start="0"
-        data-duration="20"
+        data-duration="24"
         data-track-index="10"
         data-volume="1"
       ></audio>
+
+      <!-- magic move across the cut: prompt.handoff → beats.likeMark -->
+      <div
+        id="el-traveler"
+        data-composition-id="traveler"
+        data-composition-src="compositions/traveler.html"
+        data-start="5.75"
+        data-duration="0.75"
+        data-track-index="2"
+        data-width="1920"
+        data-height="1080"
+      ></div>
     </div>
 
     <script>

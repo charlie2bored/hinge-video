@@ -31,32 +31,6 @@
       inset: 0;
       background: #f3eee7;
     }
-    #prompt-glow {
-      position: absolute;
-      left: 260px;
-      top: -160px;
-      width: 1400px;
-      height: 1400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(109, 46, 98, 0.13) 0%, rgba(109, 46, 98, 0) 62%);
-    }
-    #prompt-ghost {
-      position: absolute;
-      left: -120px;
-      top: 330px;
-      width: 900px;
-      height: 900px;
-    }
-    #prompt-chapter {
-      position: absolute;
-      left: 96px;
-      top: 72px;
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #6a5e64;
-    }
     #prompt-stack {
       position: absolute;
       left: 440px;
@@ -144,24 +118,6 @@
     #prompt-heart-fill {
       opacity: 0;
     }
-    .prompt-tick {
-      position: absolute;
-      left: 60px;
-      top: 60px;
-      width: 4px;
-      height: 4px;
-    }
-    .prompt-tick i {
-      position: absolute;
-      left: -3px;
-      top: -86px;
-      width: 6px;
-      height: 22px;
-      border-radius: 3px;
-      background: #6d2e62;
-      opacity: 0;
-    }
-
     /* Beautiful UI ChatComposer (composer part) at 2.2× */
     #prompt-composer {
       width: 1040px;
@@ -265,11 +221,24 @@
       left: 1332px;
       top: 468px;
     }
+    /* rests on the pill's right end so it never covers the label */
     #prompt-touch-send {
-      left: 1333px;
-      top: 853px;
+      left: 1434px;
+      top: 875px;
+      width: 56px;
+      height: 56px;
       background: rgba(255, 255, 255, 0.28);
       border-color: rgba(255, 255, 255, 0.7);
+    }
+    /* Magic move: the liked heart leaves the tile and becomes the status line's icon */
+    #prompt-traveler {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 64px;
+      height: 64px;
+      transform-origin: 0 0;
+      opacity: 0;
     }
 
     /* Beautiful UI ThinkingState: grey label with a dark band sweeping through it */
@@ -282,7 +251,10 @@
       align-items: center;
       justify-content: center;
       gap: 20px;
-      opacity: 0;
+    }
+    #prompt-status-slot {
+      width: 46px;
+      height: 46px;
     }
     #prompt-status-label {
       font-size: 44px;
@@ -302,19 +274,13 @@
     id="root"
     data-composition-id="prompt"
     data-start="0"
-    data-duration="5"
+    data-duration="6"
     data-width="1920"
     data-height="1080"
   >
-    <div id="prompt-bg" class="clip" data-start="0" data-duration="5" data-track-index="0">
-      <div id="prompt-glow"></div>
-      <svg id="prompt-ghost" viewBox="0 0 24 24" fill="none" stroke="rgba(109, 46, 98, 0.08)" stroke-width="0.35">
-        <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
-      </svg>
-    </div>
+    <div id="prompt-bg" class="clip" data-start="0" data-duration="6" data-track-index="0"></div>
 
-    <div id="prompt-scene" class="clip" data-start="0" data-duration="5" data-track-index="1">
-      <div id="prompt-chapter">01 — The prompt</div>
+    <div id="prompt-scene" class="clip" data-start="0" data-duration="6" data-track-index="1">
 
       <div id="prompt-stack">
         <div id="prompt-name">Maya <small>29 · Brooklyn</small></div>
@@ -333,14 +299,6 @@
                 <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
               </svg>
             </div>
-            <div class="prompt-tick" style="transform: rotate(0deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(45deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(90deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(135deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(180deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(225deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(270deg)"><i></i></div>
-            <div class="prompt-tick" style="transform: rotate(315deg)"><i></i></div>
           </div>
         </div>
 
@@ -363,11 +321,13 @@
       </div>
 
       <div id="prompt-status">
-        <svg width="46" height="46" viewBox="0 0 24 24" fill="#62656b">
-          <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
-        </svg>
+        <div id="prompt-status-slot"></div>
         <div id="prompt-status-label">Maya is typing</div>
       </div>
+
+      <svg id="prompt-traveler" viewBox="0 0 24 24" fill="#6d2e62" stroke="#6d2e62" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
+      </svg>
 
       <div id="prompt-touch-heart" class="prompt-touch"></div>
       <div id="prompt-touch-send" class="prompt-touch"></div>
@@ -397,66 +357,99 @@
         );
       };
 
-      // Ambient: glow breathes, a ghost heart drifts.
-      tl.fromTo("#prompt-glow", { scale: 0.96 }, { scale: 1.06, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
-      tl.fromTo("#prompt-ghost", { x: -30, y: 20, rotation: -8 }, { x: 30, y: -10, rotation: -2, duration: 5, ease: "none" }, 0);
+      // Timing comes from cues.js (bars and beats), never literal seconds.
+      const C = window.CUES.prompt;
+      const T0 = window.CUES.scenes.prompt.start;
+      const at = (name, offset = 0) => C[name] - T0 + offset;
 
-      // Profile rises in.
-      tl.fromTo("#prompt-chapter", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
-      tl.fromTo("#prompt-name", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.0);
-      tl.fromTo("#prompt-card", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.08);
-      tl.fromTo("#prompt-question", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.45);
-      tl.fromTo("#prompt-heart-btn", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.55);
+      // Closed-form spring step (product-film kit/spring.ts), usable as a GSAP ease.
+      const step = (t, k = 150, c = 20) => {
+        if (t <= 0) return 0;
+        const w = Math.sqrt(k), z = c / (2 * w), wd = w * Math.sqrt(1 - z * z);
+        return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + ((z * w) / wd) * Math.sin(wd * t));
+      };
+      const glide = (duration) => (p) => step(p * duration);
 
-      // Caret waits, types the answer, waits again.
-      tl.fromTo("#prompt-caret", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0.5);
-      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.18 }, 0.7);
-      typeInto($("#prompt-typed"), "you ask a second question.", 0.9, 1.5);
-      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.14 }, 2.45);
-      tl.to("#prompt-caret", { opacity: 0, duration: 0.15 }, 2.75);
+      // Bar 1: the profile rises, the prompt types.
+      tl.fromTo("#prompt-name", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: glide(0.8) }, at("profileIn"));
+      tl.fromTo("#prompt-card", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.8, ease: glide(0.8) }, at("profileIn", 0.06));
+      tl.fromTo("#prompt-question", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, at("question"));
+      tl.fromTo("#prompt-heart-btn", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: glide(0.6) }, at("heartTile"));
+      tl.fromTo("#prompt-caret", { opacity: 0 }, { opacity: 1, duration: 0.01 }, at("question"));
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.2 }, at("question", 0.25));
+      typeInto($("#prompt-typed"), "you ask a second question.", at("typeAnswer"), at("answerDone") - at("typeAnswer"));
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.2 }, at("answerDone", 0.05));
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.12 }, at("heartTap"));
 
-      // Tap the heart tile.
-      tl.fromTo("#prompt-touch-heart", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power2.out" }, 2.4);
-      tl.to("#prompt-touch-heart", { scale: 0.78, duration: 0.08, ease: "power2.in" }, 2.62);
-      tl.to("#prompt-heart-btn", { scale: 0.92, duration: 0.08, ease: "power2.in" }, 2.62);
-      tl.to("#prompt-heart-btn", { scale: 1, duration: 0.5, ease: "elastic.out(1.1, 0.4)" }, 2.7);
-      tl.to("#prompt-touch-heart", { scale: 1.3, opacity: 0, duration: 0.3, ease: "power2.out" }, 2.72);
-      tl.fromTo("#prompt-heart-fill", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 2.7);
-      tl.fromTo("#prompt-heart", { scale: 0.7 }, { scale: 1, duration: 0.55, ease: "back.out(3)", immediateRender: false }, 2.7);
-      tl.fromTo(".prompt-tick i", { y: 22, opacity: 1 }, { y: -18, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.72);
+      // Bar 2: tap the heart on the beat. The target reacts; no rings, no particles.
+      tl.fromTo("#prompt-touch-heart", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power2.out" }, at("heartTap", -0.25));
+      tl.to(["#prompt-touch-heart", "#prompt-heart-btn"], { scale: 0.9, duration: 0.08, ease: "power2.in" }, at("heartTap", -0.08));
+      tl.to("#prompt-heart-btn", { scale: 1, duration: 0.6, ease: glide(0.6) }, at("heartTap"));
+      tl.to("#prompt-touch-heart", { opacity: 0, duration: 0.2, ease: "power2.out" }, at("heartTap", 0.05));
+      tl.fromTo("#prompt-heart-fill", { opacity: 0 }, { opacity: 1, duration: 0.06 }, at("heartTap"));
 
       // Composer + Send like arrive (Beautiful UI fade-up: 8px, 380ms, ease-out-strong).
-      tl.fromTo("#prompt-composer", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 2.95);
-      tl.fromTo("#prompt-send-row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 3.02);
+      tl.fromTo("#prompt-composer", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, at("composerIn"));
+      tl.fromTo("#prompt-send-row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, at("composerIn", 0.06));
+      tl.to("#prompt-composer-box", { borderColor: "#e0e2e5", duration: 0.15, ease: "power2.inOut" }, at("composerIn", 0.2));
+      tl.set("#prompt-input-caret", { opacity: 1 }, at("composerIn", 0.2));
+      tl.to("#prompt-input-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.12 }, at("composerIn", 0.32));
 
-      // Focus the composer and type the comment; the send arrow wakes up on the first character.
-      tl.to("#prompt-composer-box", { borderColor: "#e0e2e5", duration: 0.15, ease: "power2.inOut" }, 3.15);
-      tl.set("#prompt-input-caret", { opacity: 1 }, 3.15);
-      tl.to("#prompt-placeholder", { opacity: 0, duration: 0.01 }, 3.28);
-      typeInto($("#prompt-comment-typed"), "Ask me one.", 3.3, 0.5);
-      tl.to("#prompt-arrow", { backgroundColor: "#1f2124", color: "#ffffff", duration: 0.2, ease: "power2.inOut" }, 3.3);
-      tl.to("#prompt-input-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.12 }, 3.85);
+      // Bar 3: type the comment; the send arrow wakes on the first character.
+      tl.to("#prompt-placeholder", { opacity: 0, duration: 0.01 }, at("typeComment"));
+      typeInto($("#prompt-comment-typed"), "Ask me one.", at("typeComment"), 0.4);
+      tl.to("#prompt-arrow", { backgroundColor: "#1f2124", color: "#ffffff", duration: 0.2, ease: "power2.inOut" }, at("typeComment"));
 
-      // Hover "Send like": the shimmer sweeps once (700ms, Tailwind ease) and the shadow lifts; then press.
-      tl.fromTo("#prompt-touch-send", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" }, 3.66);
-      tl.fromTo("#prompt-sheen", { xPercent: -100 }, { xPercent: 100, duration: 0.7, ease: "power2.inOut" }, 3.7);
+      // Hover Send like (the shimmer sweeps once, 700ms, shadow lifts), press on the beat.
+      tl.fromTo("#prompt-touch-send", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power2.out" }, at("sendPress", -0.3));
+      tl.fromTo("#prompt-sheen", { xPercent: -100 }, { xPercent: 100, duration: 0.7, ease: "power2.inOut" }, at("sendPress", -0.3));
       tl.fromTo(
         "#prompt-send",
         { boxShadow: "0 0 0 rgba(0,0,0,0), 0 0 0 rgba(0,0,0,0)" },
         { boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)", duration: 0.3, ease: "power2.inOut" },
-        3.7,
+        at("sendPress", -0.3),
       );
-      tl.to(["#prompt-touch-send", "#prompt-send"], { scale: 0.96, duration: 0.08, ease: "power2.out" }, 3.98);
-      tl.to("#prompt-send", { scale: 1, duration: 0.15, ease: "power2.out" }, 4.06);
-      tl.to("#prompt-touch-send", { scale: 1.3, opacity: 0, duration: 0.25, ease: "power2.out" }, 4.06);
+      tl.to(["#prompt-touch-send", "#prompt-send"], { scale: 0.96, duration: 0.08, ease: "power2.out" }, at("sendPress", -0.08));
+      tl.to("#prompt-send", { scale: 1, duration: 0.15, ease: "power2.out" }, at("sendPress"));
+      tl.to("#prompt-touch-send", { opacity: 0, duration: 0.2, ease: "power2.out" }, at("sendPress", 0.02));
 
-      // The like leaves: the whole profile flies up and away.
-      tl.to("#prompt-stack", { y: -1100, rotation: -5, scale: 0.92, duration: 0.62, ease: "power3.in" }, 4.12);
-      tl.to("#prompt-chapter", { opacity: 0, duration: 0.3, ease: "power2.out" }, 4.4);
+      // The like leaves. The heart stays behind and glides into the status line.
+      tl.to("#prompt-stack", { y: -1100, duration: 0.6, ease: "power3.in" }, at("flyAway"));
+      const FROM = { x: 1341, y: 477, s: 64 }; // the tile's heart (measured, debug probe)
+      const TO = { x: 0, y: 0, s: 46 }; // the status slot, filled in below
+      const slot = { x: 777.1, y: 510 }; // #prompt-status-slot (measured, debug probe)
+      TO.x = slot.x;
+      TO.y = slot.y;
+      const hop = { u: 0 };
+      tl.set("#prompt-heart", { opacity: 0 }, at("flyAway"));
+      tl.set("#prompt-traveler", { opacity: 1, x: FROM.x, y: FROM.y, scale: 1 }, at("flyAway"));
+      tl.fromTo(
+        hop,
+        { u: 0 },
+        {
+          u: 1,
+          duration: at("handoff") - at("flyAway"),
+          ease: "none",
+          immediateRender: false,
+          onUpdate: () => {
+            const e = step(hop.u * (at("handoff") - at("flyAway")));
+            gsap.set("#prompt-traveler", {
+              x: FROM.x + (TO.x - FROM.x) * e,
+              y: FROM.y + (TO.y - FROM.y) * e,
+              scale: (FROM.s + (TO.s - FROM.s) * e) / FROM.s,
+            });
+          },
+        },
+        at("flyAway"),
+      );
+      tl.set("#prompt-traveler", { opacity: 0 }, at("handoff")); // the host takes it from here
 
-      // Cliffhanger: "Maya is typing" with the ThinkingState shimmer (1.4s linear sweep).
-      tl.fromTo("#prompt-status", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 4.3);
-      tl.to("#prompt-status-label", { backgroundPosition: "-50% 50%", duration: 1.4, ease: "none" }, 3.95);
+      // "Maya is typing": the label blur-swaps in beside the landed heart, the
+      // ThinkingState band crosses it, then it blurs out for the cut.
+      tl.fromTo("#prompt-status-label", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "none" }, at("statusIn"));
+      tl.fromTo("#prompt-status-label", { backgroundPosition: "150% 50%" }, { backgroundPosition: "-50% 50%", duration: 1.4, ease: "none", immediateRender: false }, at("statusIn", -0.2));
+      tl.to("#prompt-status-label", { opacity: 0, filter: "blur(10px)", duration: 0.1, ease: "none" }, at("handoff", 0.05));
+
 
       window.__timelines["prompt"] = tl;
     })();
