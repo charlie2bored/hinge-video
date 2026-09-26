@@ -1,0 +1,469 @@
+<template id="delete-template">
+  <style>
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: normal;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: italic;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Geist";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #1d1519;
+      font-family: "Geist", sans-serif;
+    }
+    #delete-bg {
+      position: absolute;
+      inset: 0;
+      background: #f3eee7;
+    }
+    #delete-glow {
+      position: absolute;
+      left: 700px;
+      top: -300px;
+      width: 1300px;
+      height: 1300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109, 46, 98, 0.12) 0%, rgba(109, 46, 98, 0) 60%);
+    }
+    #delete-chapter {
+      position: absolute;
+      left: 96px;
+      top: 72px;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6a5e64;
+    }
+    #delete-copy {
+      position: absolute;
+      left: 160px;
+      top: 330px;
+      width: 860px;
+    }
+    #delete-day {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: #6a5e64;
+    }
+    #delete-headline {
+      margin-top: 22px;
+      font-family: "Instrument Serif", serif;
+      font-size: 140px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    #delete-headline span {
+      display: block;
+    }
+    #delete-headline em {
+      font-style: italic;
+      color: #6d2e62;
+    }
+    #delete-sub {
+      margin-top: 36px;
+      font-size: 42px;
+      color: #4a3f45;
+    }
+
+    /* Phone */
+    #delete-phone {
+      position: absolute;
+      left: 1100px;
+      top: 70px;
+      width: 460px;
+      height: 940px;
+      padding: 14px;
+      border-radius: 76px;
+      background: #1d1519;
+      box-shadow: 0 40px 100px rgba(60, 20, 50, 0.28);
+      /* punch-in pivots on the alert so it grows in place */
+      transform-origin: 230px 437px;
+    }
+    #delete-screen {
+      position: relative;
+      width: 432px;
+      height: 912px;
+      border-radius: 62px;
+      overflow: hidden;
+      background: linear-gradient(165deg, #2c1529 0%, #6d2e62 52%, #c98fae 100%);
+    }
+    #delete-status {
+      position: absolute;
+      left: 46px;
+      top: 22px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    #delete-island {
+      position: absolute;
+      left: 156px;
+      top: 16px;
+      width: 120px;
+      height: 34px;
+      border-radius: 17px;
+      background: #0d080b;
+    }
+    .delete-icon {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+    }
+    .delete-tile {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .delete-glyph {
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(255, 255, 255, 0.8);
+    }
+    .delete-glyph.g0 {
+      border-radius: 50%;
+    }
+    .delete-glyph.g1 {
+      border-radius: 8px;
+    }
+    .delete-glyph.g2 {
+      border-radius: 50% 50% 50% 4px;
+    }
+    .delete-glyph.g3 {
+      width: 34px;
+      height: 14px;
+      border-radius: 7px;
+    }
+    #delete-hinge .delete-tile {
+      background: #1d1519;
+      box-shadow: inset 0 0 0 1.5px rgba(243, 238, 231, 0.18);
+    }
+    #delete-hinge-h {
+      font-family: "Instrument Serif", serif;
+      font-size: 60px;
+      line-height: 1;
+      color: #f3eee7;
+      margin-top: 4px;
+    }
+    .delete-badge {
+      position: absolute;
+      left: -9px;
+      top: -9px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(235, 230, 232, 0.96);
+      opacity: 0;
+    }
+    .delete-badge::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 12.5px;
+      width: 12px;
+      height: 3px;
+      border-radius: 2px;
+      background: #1d1519;
+    }
+    #delete-dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 750px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    #delete-dots i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+    }
+    #delete-dots i:first-child {
+      background: #ffffff;
+    }
+    #delete-dock {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 784px;
+      height: 112px;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    #delete-dim {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 10, 16, 0.4);
+      opacity: 0;
+    }
+    #delete-alert {
+      position: absolute;
+      left: 56px;
+      top: 318px;
+      width: 320px;
+      border-radius: 26px;
+      background: rgba(250, 247, 244, 0.97);
+      text-align: center;
+      overflow: hidden;
+      opacity: 0;
+    }
+    #delete-alert-title {
+      padding: 26px 22px 8px;
+      font-size: 24px;
+      font-weight: 650;
+      color: #1d1519;
+    }
+    #delete-alert-body {
+      padding: 0 26px 24px;
+      font-size: 20px;
+      line-height: 1.3;
+      color: #4a3f45;
+    }
+    #delete-alert-actions {
+      display: flex;
+      border-top: 1px solid rgba(29, 21, 25, 0.14);
+    }
+    #delete-alert-actions div {
+      flex: 1;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    #delete-keep {
+      color: #1d1519;
+      border-right: 1px solid rgba(29, 21, 25, 0.14);
+    }
+    #delete-confirm {
+      color: #a82525;
+      font-weight: 650;
+    }
+    #delete-touch {
+      position: absolute;
+      left: 139px;
+      top: 211px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      opacity: 0;
+    }
+    .delete-puff {
+      position: absolute;
+      left: 160px;
+      top: 232px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #f3eee7;
+      opacity: 0;
+    }
+    #delete-iris {
+      position: absolute;
+      left: 1232px;
+      top: 274px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #1d1519;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="delete"
+    data-start="0"
+    data-duration="5.5"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div id="delete-bg" class="clip" data-start="0" data-duration="5.5" data-track-index="0">
+      <div id="delete-glow"></div>
+    </div>
+
+    <div id="delete-scene" class="clip" data-start="0" data-duration="5.5" data-track-index="1">
+      <div id="delete-chapter">03 — The goal</div>
+
+      <div id="delete-copy">
+        <div id="delete-day">Day 214</div>
+        <div id="delete-headline">
+          <span>Found your</span>
+          <span><em>person?</em></span>
+        </div>
+        <div id="delete-sub">Then you know what to do.</div>
+      </div>
+
+      <div id="delete-phone" data-layout-allow-overflow>
+        <div id="delete-screen">
+          <div id="delete-status">9:41</div>
+          <div id="delete-island"></div>
+          <div id="delete-grid"></div>
+          <div id="delete-dots"><i></i><i></i><i></i></div>
+          <div id="delete-dock"></div>
+          <div class="delete-puff"></div>
+          <div class="delete-puff"></div>
+          <div class="delete-puff"></div>
+          <div class="delete-puff"></div>
+          <div class="delete-puff"></div>
+          <div class="delete-puff"></div>
+          <div id="delete-dim"></div>
+          <div id="delete-alert">
+            <div id="delete-alert-title">Delete “Hinge”?</div>
+            <div id="delete-alert-body">Mission accomplished.</div>
+            <div id="delete-alert-actions">
+              <div id="delete-keep">Keep</div>
+              <div id="delete-confirm">Delete</div>
+            </div>
+          </div>
+          <div id="delete-touch"></div>
+        </div>
+      </div>
+
+      <div id="delete-iris"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+
+      // ---- Home screen, laid out once from fixed constants -------------------
+      const ICON = 76, COL = 96, ROW = 112, X0 = 34, Y0 = 90, HINGE = 5;
+      const pos = (i) => ({ x: X0 + (i % 4) * COL, y: Y0 + Math.floor(i / 4) * ROW });
+      const tints = [
+        "#e7c3d6", "#c9a27e", "#8fa89b", "#d98b6a", "#f1d9a7", "#hinge", "#9db4c9", "#b7a1c9",
+        "#ebd3c1", "#7e9c8b", "#d4b5a0", "#a7879b", "#f0b9a2", "#88a0b8", "#c7c08f", "#e2a9b9",
+        "#9c8fb4", "#d9c8b0", "#b3cbbf", "#e8bf8e",
+      ];
+      const dockTints = ["#f3eee7", "#9db4c9", "#8fa89b", "#e7c3d6"];
+      const screen = document.getElementById("delete-screen");
+      const grid = document.getElementById("delete-grid");
+      const dock = document.getElementById("delete-dock");
+
+      const makeIcon = (parent, left, top, tint, glyph, id) => {
+        const icon = document.createElement("div");
+        icon.className = "delete-icon";
+        if (id) icon.id = id;
+        icon.style.left = left + "px";
+        icon.style.top = top + "px";
+        const tile = document.createElement("div");
+        tile.className = "delete-tile";
+        if (id === "delete-hinge") {
+          tile.innerHTML = '<span id="delete-hinge-h" data-layout-allow-occlusion>H</span>';
+        } else {
+          tile.style.background = tint;
+          tile.innerHTML = `<div class="delete-glyph g${glyph}"></div>`;
+        }
+        const badge = document.createElement("div");
+        badge.className = "delete-badge";
+        icon.append(tile, badge);
+        parent.appendChild(icon);
+        return icon;
+      };
+
+      const icons = tints.map((tint, i) => {
+        const p = pos(i);
+        return makeIcon(grid, p.x, p.y, tint, (i * 7) % 4, i === HINGE ? "delete-hinge" : null);
+      });
+      const dockIcons = dockTints.map((tint, i) => makeIcon(dock, 18 + i * COL, 18, tint, (i * 3 + 1) % 4));
+      const everyIcon = [...icons, ...dockIcons];
+      const hinge = icons[HINGE];
+
+      // ---- Copy and phone arrive ---------------------------------------------
+      tl.fromTo("#delete-glow", { scale: 0.95 }, { scale: 1.05, duration: 2.75, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.fromTo("#delete-chapter", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+      tl.fromTo("#delete-phone", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0);
+      tl.fromTo("#delete-day", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.15);
+      tl.fromTo(
+        "#delete-headline span",
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.14 },
+        0.25,
+      );
+      tl.fromTo("#delete-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+
+      // ---- Long-press: icons start to jiggle ----------------------------------
+      tl.fromTo("#delete-touch", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power2.out" }, 1.2);
+      tl.to("#delete-touch", { scale: 1.25, duration: 0.4, ease: "sine.out" }, 1.4);
+      tl.to(hinge, { scale: 1.08, duration: 0.4, ease: "sine.out" }, 1.4);
+      tl.to(hinge, { scale: 1, duration: 0.2, ease: "power2.out" }, 1.8);
+      tl.fromTo(
+        everyIcon,
+        { rotation: -2.4 },
+        { rotation: 2.4, duration: 0.11, ease: "sine.inOut", yoyo: true, repeat: 15, stagger: 0.013, immediateRender: false },
+        1.8,
+      );
+      tl.fromTo(
+        everyIcon.map((el) => el.querySelector(".delete-badge")),
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(3)", stagger: 0.008 },
+        1.82,
+      );
+
+      // ---- Tap the badge, confirm --------------------------------------------
+      const hp = pos(HINGE);
+      tl.to("#delete-touch", { x: -34, y: -34, scale: 1, duration: 0.3, ease: "power2.inOut" }, 1.95);
+      tl.to("#delete-touch", { scale: 0.8, duration: 0.08, ease: "power2.in" }, 2.3);
+      tl.to("#delete-touch", { scale: 1, duration: 0.15, ease: "power2.out" }, 2.38);
+      tl.to("#delete-phone", { scale: 1.5, duration: 0.5, ease: "power3.inOut" }, 2.3);
+      tl.to("#delete-phone", { scale: 1, duration: 0.45, ease: "power3.inOut" }, 3.5);
+      tl.fromTo("#delete-dim", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 2.42);
+      tl.fromTo("#delete-alert", { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "power3.out" }, 2.45);
+      // Delete button centre in screen coords: alert left 56 + 3/4 of 320, row sits ~152px into the alert.
+      tl.to("#delete-touch", { x: 56 + 240 - (hp.x + 38), y: 318 + 152 - (hp.y + 38), duration: 0.45, ease: "power2.inOut" }, 2.75);
+      tl.to("#delete-touch", { scale: 0.8, duration: 0.08, ease: "power2.in" }, 3.28);
+      tl.fromTo("#delete-confirm", { backgroundColor: "rgba(196,45,45,0)" }, { backgroundColor: "rgba(196,45,45,0.14)", duration: 0.08 }, 3.28);
+      tl.to("#delete-touch", { scale: 1.3, opacity: 0, duration: 0.25, ease: "power2.out" }, 3.38);
+      tl.to("#delete-alert", { scale: 0.96, opacity: 0, duration: 0.2, ease: "power2.in" }, 3.45);
+      tl.to("#delete-dim", { opacity: 0, duration: 0.25, ease: "power2.out" }, 3.5);
+
+      // ---- The app goes -------------------------------------------------------
+      tl.to(hinge, { scale: 0, rotation: 18, duration: 0.32, ease: "back.in(2)" }, 3.68);
+      document.querySelectorAll(".delete-puff").forEach((puff, i) => {
+        const a = (i / 6) * Math.PI * 2 + 0.4;
+        tl.fromTo(
+          puff,
+          { x: 0, y: 0, scale: 1, opacity: 0.9 },
+          { x: Math.cos(a) * 70, y: Math.sin(a) * 70, scale: 0.2, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false },
+          3.95,
+        );
+      });
+      tl.to(everyIcon, { rotation: 0, duration: 0.12, ease: "power2.out" }, 3.9);
+      icons.slice(HINGE + 1).forEach((icon, k) => {
+        const i = HINGE + 1 + k;
+        const from = pos(i), to = pos(i - 1);
+        tl.to(icon, { x: to.x - from.x, y: to.y - from.y, duration: 0.45, ease: "power3.inOut" }, 4.0 + k * 0.025);
+      });
+
+      // ---- Iris out of the empty slot into the end card ----------------------
+      tl.fromTo("#delete-iris", { scale: 0 }, { scale: 32, duration: 0.85, ease: "power3.in" }, 4.55);
+
+      window.__timelines["delete"] = tl;
+    })();
+  </script>
+</template>

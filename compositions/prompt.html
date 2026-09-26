@@ -1,0 +1,339 @@
+<template id="prompt-template">
+  <style>
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: normal;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: italic;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Geist";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #1d1519;
+      font-family: "Geist", sans-serif;
+    }
+    #prompt-bg {
+      position: absolute;
+      inset: 0;
+      background: #f3eee7;
+    }
+    #prompt-glow {
+      position: absolute;
+      left: 260px;
+      top: -160px;
+      width: 1400px;
+      height: 1400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109, 46, 98, 0.13) 0%, rgba(109, 46, 98, 0) 62%);
+    }
+    #prompt-ghost {
+      position: absolute;
+      left: -120px;
+      top: 330px;
+      width: 900px;
+      height: 900px;
+    }
+    #prompt-chapter {
+      position: absolute;
+      left: 96px;
+      top: 72px;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6a5e64;
+    }
+    #prompt-stack {
+      position: absolute;
+      left: 440px;
+      top: 196px;
+      width: 1040px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    #prompt-name {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      font-size: 60px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    #prompt-name small {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: #6a5e64;
+    }
+    #prompt-card {
+      position: relative;
+      width: 1040px;
+      height: 440px;
+      padding: 60px 72px 0;
+      border-radius: 36px;
+      background: #fffdfb;
+      box-shadow:
+        0 1px 0 rgba(29, 21, 25, 0.04),
+        0 30px 80px rgba(60, 20, 50, 0.12);
+    }
+    #prompt-question {
+      font-size: 34px;
+      font-weight: 500;
+      color: #4a3f45;
+    }
+    #prompt-answer {
+      margin-top: 26px;
+      width: 820px;
+      font-family: "Instrument Serif", serif;
+      font-size: 118px;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    #prompt-caret {
+      display: inline-block;
+      width: 5px;
+      height: 0.82em;
+      margin-left: 6px;
+      vertical-align: -0.08em;
+      background: #6d2e62;
+    }
+    #prompt-heart-btn {
+      position: absolute;
+      right: 48px;
+      bottom: 48px;
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid #e8dfe4;
+      box-shadow: 0 10px 28px rgba(60, 20, 50, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #prompt-heart {
+      position: relative;
+      width: 52px;
+      height: 52px;
+    }
+    #prompt-heart svg {
+      position: absolute;
+      inset: 0;
+      width: 52px;
+      height: 52px;
+    }
+    #prompt-heart-fill {
+      opacity: 0;
+    }
+    .prompt-tick {
+      position: absolute;
+      left: 60px;
+      top: 60px;
+      width: 4px;
+      height: 4px;
+    }
+    .prompt-tick i {
+      position: absolute;
+      left: -3px;
+      top: -86px;
+      width: 6px;
+      height: 22px;
+      border-radius: 3px;
+      background: #6d2e62;
+      opacity: 0;
+    }
+    .prompt-touch {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: rgba(29, 21, 25, 0.16);
+      border: 2px solid rgba(29, 21, 25, 0.28);
+      opacity: 0;
+    }
+    #prompt-touch-heart {
+      left: 1328px;
+      top: 582px;
+    }
+    #prompt-comment {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 1040px;
+      height: 112px;
+      padding: 0 16px 0 44px;
+      border-radius: 56px;
+      background: #fffdfb;
+      border: 1.5px solid #e8dfe4;
+    }
+    #prompt-comment-text {
+      position: relative;
+      font-size: 38px;
+    }
+    #prompt-placeholder {
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+      color: #6a5e64;
+    }
+    #prompt-send {
+      width: 240px;
+      height: 80px;
+      border-radius: 40px;
+      background: #6d2e62;
+      color: #f3eee7;
+      font-size: 30px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #prompt-touch-send {
+      left: 1302px;
+      top: 774px;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="prompt"
+    data-start="0"
+    data-duration="5"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div id="prompt-bg" class="clip" data-start="0" data-duration="5" data-track-index="0">
+      <div id="prompt-glow"></div>
+      <svg id="prompt-ghost" viewBox="0 0 24 24" fill="none" stroke="rgba(109, 46, 98, 0.08)" stroke-width="0.35">
+        <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+      </svg>
+    </div>
+
+    <div id="prompt-scene" class="clip" data-start="0" data-duration="5" data-track-index="1">
+      <div id="prompt-chapter">01 — The prompt</div>
+
+      <div id="prompt-stack">
+        <div id="prompt-name">Maya <small>29 · Brooklyn</small></div>
+
+        <div id="prompt-card">
+          <div id="prompt-question">I’ll fall for you if</div>
+          <div id="prompt-answer"><span id="prompt-typed"></span><span id="prompt-caret"></span></div>
+
+          <div id="prompt-heart-btn">
+            <div id="prompt-heart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d1519" stroke-width="1.7" stroke-linejoin="round">
+                <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+              </svg>
+              <svg id="prompt-heart-fill" viewBox="0 0 24 24" fill="#6d2e62">
+                <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+              </svg>
+            </div>
+            <div class="prompt-tick" style="transform: rotate(0deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(45deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(90deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(135deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(180deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(225deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(270deg)"><i></i></div>
+            <div class="prompt-tick" style="transform: rotate(315deg)"><i></i></div>
+          </div>
+        </div>
+
+        <div id="prompt-comment">
+          <div id="prompt-comment-text">
+            <span id="prompt-placeholder">Add a comment</span><span id="prompt-comment-typed"></span>
+          </div>
+          <div id="prompt-send">Send like</div>
+        </div>
+      </div>
+
+      <div id="prompt-touch-heart" class="prompt-touch"></div>
+      <div id="prompt-touch-send" class="prompt-touch"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+
+      // Types `text` into `el` between `start` and `start + dur`, seekable both ways.
+      const typeInto = (el, text, start, dur) => {
+        const p = { n: 0 };
+        tl.fromTo(
+          p,
+          { n: 0 },
+          {
+            n: text.length,
+            duration: dur,
+            ease: "none",
+            onUpdate: () => {
+              el.textContent = text.slice(0, Math.round(p.n));
+            },
+          },
+          start,
+        );
+      };
+
+      // Ambient: glow breathes, a ghost heart drifts.
+      tl.fromTo("#prompt-glow", { scale: 0.96 }, { scale: 1.06, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.fromTo("#prompt-ghost", { x: -30, y: 20, rotation: -8 }, { x: 30, y: -10, rotation: -2, duration: 5, ease: "none" }, 0);
+
+      // Profile rises in.
+      tl.fromTo("#prompt-chapter", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+      tl.fromTo("#prompt-name", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.0);
+      tl.fromTo("#prompt-card", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.08);
+      tl.fromTo("#prompt-question", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.45);
+      tl.fromTo("#prompt-heart-btn", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.55);
+      tl.set("#prompt-comment", { opacity: 0, y: 40 }, 0);
+
+      // Caret waits, types the answer, waits again.
+      tl.fromTo("#prompt-caret", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0.5);
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.18 }, 0.7);
+      typeInto($("#prompt-typed"), "you ask a second question.", 0.9, 1.5);
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.01, repeat: 1, yoyo: true, repeatDelay: 0.14 }, 2.45);
+      tl.to("#prompt-caret", { opacity: 0, duration: 0.15 }, 2.75);
+
+      // Tap the heart.
+      tl.fromTo("#prompt-touch-heart", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power2.out" }, 2.4);
+      tl.to("#prompt-touch-heart", { scale: 0.78, duration: 0.08, ease: "power2.in" }, 2.62);
+      tl.to("#prompt-heart-btn", { scale: 0.9, duration: 0.08, ease: "power2.in" }, 2.62);
+      tl.to("#prompt-heart-btn", { scale: 1, duration: 0.5, ease: "elastic.out(1.1, 0.4)" }, 2.7);
+      tl.to("#prompt-touch-heart", { scale: 1.3, opacity: 0, duration: 0.3, ease: "power2.out" }, 2.72);
+      tl.fromTo("#prompt-heart-fill", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 2.7);
+      tl.fromTo("#prompt-heart", { scale: 0.7 }, { scale: 1, duration: 0.55, ease: "back.out(3)", immediateRender: false }, 2.7);
+      tl.fromTo(".prompt-tick i", { y: 22, opacity: 1 }, { y: -18, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.72);
+
+      // Add a comment, send the like.
+      tl.to("#prompt-comment", { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 2.95);
+      tl.to("#prompt-placeholder", { opacity: 0, duration: 0.01 }, 3.28);
+      typeInto($("#prompt-comment-typed"), "Ask me one.", 3.3, 0.5);
+      tl.fromTo("#prompt-touch-send", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" }, 3.82);
+      tl.to(["#prompt-touch-send", "#prompt-send"], { scale: 0.92, duration: 0.08, ease: "power2.in" }, 3.98);
+      tl.to("#prompt-send", { scale: 1, duration: 0.2, ease: "back.out(3)" }, 4.06);
+      tl.to("#prompt-touch-send", { scale: 1.3, opacity: 0, duration: 0.25, ease: "power2.out" }, 4.06);
+
+      // The like leaves: the whole profile flies up and away.
+      tl.to("#prompt-stack", { y: -1000, rotation: -5, scale: 0.92, duration: 0.62, ease: "power3.in" }, 4.12);
+      tl.to("#prompt-chapter", { opacity: 0, duration: 0.3, ease: "power2.out" }, 4.4);
+
+      window.__timelines["prompt"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,268 @@
+<template id="beats-template">
+  <style>
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: normal;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Instrument Serif";
+      font-style: italic;
+      font-weight: 400;
+      src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Geist";
+      font-style: normal;
+      font-weight: 100 900;
+      src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #1d1519;
+      font-family: "Geist", sans-serif;
+    }
+    #beats-bg {
+      position: absolute;
+      inset: 0;
+      background: #f3eee7;
+    }
+    #beats-dark {
+      position: absolute;
+      inset: 0;
+      background: #1d1519;
+      opacity: 0;
+    }
+    #beats-chapter {
+      position: absolute;
+      left: 96px;
+      top: 72px;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6a5e64;
+    }
+    .beats-day {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 200px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: #6a5e64;
+      opacity: 0;
+    }
+    .beats-word {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Instrument Serif", serif;
+      font-size: 280px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      opacity: 0;
+    }
+    .beats-word span {
+      display: inline-block;
+    }
+    .beats-glyph {
+      display: inline-block;
+      white-space: pre;
+    }
+    .beats-word em {
+      display: inline-block;
+      font-style: italic;
+      color: #6d2e62;
+    }
+    #beats-w2-mask {
+      display: block;
+      overflow: hidden;
+      padding: 0 0.08em 0.08em;
+    }
+    #beats-w3,
+    #beats-w4 {
+      font-size: 240px;
+      gap: 0.22em;
+    }
+    #beats-w5 {
+      font-size: 200px;
+      color: #f3eee7;
+    }
+    #beats-w6 {
+      font-size: 340px;
+    }
+    #beats-w6 em {
+      padding-right: 0.06em;
+    }
+    #beats-heart {
+      position: absolute;
+      left: 1170px;
+      top: 360px;
+      width: 96px;
+      height: 96px;
+      opacity: 0;
+    }
+    #beats-rail {
+      position: absolute;
+      left: 160px;
+      top: 858px;
+      width: 1600px;
+      height: 2px;
+      background: rgba(29, 21, 25, 0.14);
+    }
+    #beats-rail-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1600px;
+      height: 2px;
+      background: #6d2e62;
+      transform-origin: 0 50%;
+    }
+    .beats-dot {
+      position: absolute;
+      top: -7px;
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      border-radius: 50%;
+      background: #6d2e62;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="beats"
+    data-start="0"
+    data-duration="6"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div id="beats-bg" class="clip" data-start="0" data-duration="6" data-track-index="0">
+      <div id="beats-dark"></div>
+    </div>
+
+    <div id="beats-scene" class="clip" data-start="0" data-duration="6" data-track-index="1">
+      <div id="beats-chapter">02 — The part in between</div>
+
+      <div class="beats-day" id="beats-d1">Day 1</div>
+      <div class="beats-day" id="beats-d2">Day 2</div>
+      <div class="beats-day" id="beats-d3">Day 9</div>
+      <div class="beats-day" id="beats-d4">Day 16</div>
+      <div class="beats-day" id="beats-d5">Day 58</div>
+      <div class="beats-day" id="beats-d6">Day 214</div>
+
+      <div class="beats-word" id="beats-w1"><span>Like.</span></div>
+      <div class="beats-word" id="beats-w2">
+        <span id="beats-w2-mask"><span id="beats-w2-inner">Match.</span></span>
+      </div>
+      <div class="beats-word" id="beats-w3"><span>First</span><span>date.</span></div>
+      <div class="beats-word" id="beats-w4"><em id="beats-second">Second</em><span>date.</span></div>
+      <div class="beats-word" id="beats-w5"><span id="beats-friends">Meet the friends.</span></div>
+      <div class="beats-word" id="beats-w6"><em id="beats-us">Us.</em></div>
+
+      <svg id="beats-heart" viewBox="0 0 24 24" fill="#6d2e62">
+        <path d="M12 20.5s-7.8-4.9-9.6-9.8C1.2 7.1 3.6 4 7 4c2 0 3.8 1.1 5 2.8C13.2 5.1 15 4 17 4c3.4 0 5.8 3.1 4.6 6.7-1.8 4.9-9.6 9.8-9.6 9.8z" />
+      </svg>
+
+      <div id="beats-rail">
+        <div id="beats-rail-fill"></div>
+        <div class="beats-dot" style="left: 0px"></div>
+        <div class="beats-dot" style="left: 320px"></div>
+        <div class="beats-dot" style="left: 640px"></div>
+        <div class="beats-dot" style="left: 960px"></div>
+        <div class="beats-dot" style="left: 1280px"></div>
+        <div class="beats-dot" style="left: 1600px"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const BEAT = 1; // one word per second, on the downbeat
+
+      // Hard cuts: each word and its day counter own exactly one beat.
+      for (let i = 1; i <= 6; i++) {
+        const t = (i - 1) * BEAT;
+        tl.set([`#beats-w${i}`, `#beats-d${i}`], { opacity: 1 }, t);
+        if (i < 6) tl.set([`#beats-w${i}`, `#beats-d${i}`], { opacity: 0 }, t + BEAT);
+      }
+
+      // Progress rail fills in steps; each dot pops as its beat lands.
+      tl.fromTo("#beats-rail-fill", { scaleX: 0 }, { scaleX: 0.001, duration: 0.01 }, 0);
+      document.querySelectorAll(".beats-dot").forEach((dot, i) => {
+        tl.fromTo(dot, { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, i * BEAT);
+        if (i > 0) tl.to("#beats-rail-fill", { scaleX: i / 5, duration: 0.4, ease: "power3.out" }, i * BEAT);
+      });
+
+      // 1 · Like. — oversized, settles down to size.
+      tl.fromTo("#beats-w1 span", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0);
+      tl.to("#beats-w1 span", { scale: 0.97, duration: 0.55, ease: "none" }, 0.45);
+
+      // 2 · Match. — slides up out of a mask.
+      tl.fromTo("#beats-w2-inner", { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 1);
+
+      // 3 · First date. — words blur into focus, one after the other.
+      tl.fromTo(
+        "#beats-w3 span",
+        { opacity: 0, y: 30, filter: "blur(18px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out", stagger: 0.12 },
+        2,
+      );
+
+      // 4 · Second date. — only the first word swaps; it punches in.
+      tl.fromTo("#beats-second", { scale: 1.25 }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 3);
+
+      // 5 · Meet the friends. — the room goes dark, the letters pull together.
+      tl.set("#beats-dark", { opacity: 1 }, 4);
+      tl.set("#beats-dark", { opacity: 0 }, 5);
+      tl.set(["#beats-chapter", "#beats-d5"], { color: "#c9b9c2" }, 4);
+      tl.set(["#beats-chapter"], { color: "#6a5e64" }, 5);
+      tl.set("#beats-rail-fill", { backgroundColor: "#e7c3d6" }, 4);
+      tl.set("#beats-rail-fill", { backgroundColor: "#6d2e62" }, 5);
+      tl.set(".beats-dot", { backgroundColor: "#e7c3d6" }, 4);
+      tl.set(".beats-dot", { backgroundColor: "#6d2e62" }, 5);
+      const friends = document.getElementById("beats-friends");
+      const glyphs = [...friends.textContent].map((ch) => {
+        const g = document.createElement("span");
+        g.className = "beats-glyph";
+        g.textContent = ch;
+        return g;
+      });
+      friends.replaceChildren(...glyphs);
+      const mid = (glyphs.length - 1) / 2;
+      glyphs.forEach((g, i) => {
+        tl.fromTo(
+          g,
+          { x: (i - mid) * 46, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+          4,
+        );
+      });
+
+      // 6 · Us. — spring pop, and a heart lands beside it.
+      tl.fromTo("#beats-us", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2.2)" }, 5);
+      tl.fromTo(
+        "#beats-heart",
+        { scale: 0, rotation: -25, opacity: 0 },
+        { scale: 1, rotation: 10, opacity: 1, duration: 0.5, ease: "back.out(3)" },
+        5.2,
+      );
+
+      window.__timelines["beats"] = tl;
+    })();
+  </script>
+</template>

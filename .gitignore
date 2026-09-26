@@ -1,0 +1,6 @@
+node_modules/
+snapshots/
+.hyperframes/
+.thumbnails/
+*.wav
+.DS_Store

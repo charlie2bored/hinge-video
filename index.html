@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Hinge — Designed to be deleted</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #f3eee7;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f3eee7;
+      }
+      #root > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- 01 · a prompt gets a like (0–5s) -->
+      <div
+        id="el-prompt"
+        data-composition-id="prompt"
+        data-composition-src="compositions/prompt.html"
+        data-start="0"
+        data-duration="5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- 02 · the relationship as kinetic type (5–11s) -->
+      <div
+        id="el-beats"
+        data-composition-id="beats"
+        data-composition-src="compositions/beats.html"
+        data-start="5"
+        data-duration="6"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- 03 · the app gets deleted (11–16.5s) -->
+      <div
+        id="el-delete"
+        data-composition-id="delete"
+        data-composition-src="compositions/delete.html"
+        data-start="11"
+        data-duration="5.5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- 04 · end card (16.5–20s) -->
+      <div
+        id="el-endcard"
+        data-composition-id="endcard"
+        data-composition-src="compositions/endcard.html"
+        data-start="16.5"
+        data-duration="3.5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Score + UI sound, synthesized by scripts/make_score.py -->
+      <audio
+        id="score"
+        src="assets/audio/score.mp3"
+        data-start="0"
+        data-duration="20"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
